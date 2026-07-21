@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>vidlingo — Bilingual subtitle flashcards for YouTube</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 24px 96px;
+        font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.6;
+        color: #18181b;
+        background: #fafafa;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #e4e4e7;
+          background: #0a0a0f;
+        }
+        a {
+          color: #a78bfa;
+        }
+        .card {
+          background: #141419;
+          border-color: #27272a;
+        }
+      }
+      h1 {
+        font-size: 28px;
+        margin-bottom: 4px;
+      }
+      .tagline {
+        color: #71717a;
+        font-size: 15px;
+        margin-bottom: 32px;
+      }
+      h2 {
+        font-size: 19px;
+        margin-top: 40px;
+      }
+      code {
+        background: rgba(127, 127, 127, 0.15);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      .card {
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 20px 0;
+      }
+      ul {
+        padding-left: 22px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>vidlingo</h1>
+    <p class="tagline">Bilingual subtitles + flashcards for any YouTube video, in a side panel.</p>
+
+    <p>
+      vidlingo turns any YouTube video with captions into a set of bilingual
+      sentence flashcards — right in a side panel next to the video, so you
+      never have to switch tabs.
+    </p>
+
+    <h2>How it works</h2>
+    <ol>
+      <li>Open any YouTube video that has captions.</li>
+      <li>Click "Add to library." vidlingo reads the transcript and translates it using a provider you control.</li>
+      <li>
+        Review the deck: every sentence is a card with the original text, its
+        translation, and tap-to-look-up definitions for individual words.
+        Bookmark sentences or words you want to revisit, replay any segment
+        at a slower speed, and jump back into the video from any card.
+      </li>
+    </ol>
+
+    <h2>Learn in six languages</h2>
+    <p>
+      Japanese, Chinese, Korean, Spanish, French, and German are all
+      supported as source or target languages, with dictionary-backed word
+      lookup for each. Per-language dictionary data downloads on demand —
+      nothing is bundled you don't use.
+    </p>
+
+    <h2>Your own translation provider, your choice</h2>
+    <p>
+      vidlingo never sends your video/caption data through vidlingo's own
+      servers. Pick Chrome's built-in on-device translator (free, no key,
+      nothing leaves your device) or any OpenAI-compatible LLM API endpoint
+      you configure, with your own key stored only in this device's local
+      storage.
+    </p>
+
+    <div class="card" id="support">
+      <h2 style="margin-top: 0">Support</h2>
+      <p>
+        Questions, bug reports, or feedback: <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
+      </p>
+    </div>
+
+    <p><a href="/vidlingo/privacy.html">Privacy Policy</a></p>
+  </body>
+</html>
