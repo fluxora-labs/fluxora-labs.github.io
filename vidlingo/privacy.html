@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>vidlingo — Privacy Policy</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 24px 96px;
+        font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.6;
+        color: #18181b;
+        background: #fafafa;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #e4e4e7;
+          background: #0a0a0f;
+        }
+        a {
+          color: #a78bfa;
+        }
+        .card {
+          background: #141419;
+          border-color: #27272a;
+        }
+      }
+      h1 {
+        font-size: 28px;
+        margin-bottom: 4px;
+      }
+      .updated {
+        color: #71717a;
+        font-size: 14px;
+        margin-bottom: 32px;
+      }
+      h2 {
+        font-size: 19px;
+        margin-top: 40px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 15px;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px 10px;
+        border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+        vertical-align: top;
+      }
+      th {
+        color: #71717a;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      code {
+        background: rgba(127, 127, 127, 0.15);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      .card {
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>vidlingo — Privacy Policy</h1>
+    <p class="updated">Last updated: 2026-07-21</p>
+
+    <p>
+      vidlingo (the browser extension, published by Fluxora) turns any YouTube
+      video with captions into bilingual sentence flashcards, shown in a side
+      panel next to the video. This page explains what data the extension
+      touches, what it stores, and — importantly — what it never does.
+    </p>
+
+    <h2>The short version</h2>
+    <div class="card">
+      <p>
+        Your saved decks/flashcards stay on your own device, in this
+        browser's local storage. vidlingo does not run its own server that
+        receives your videos, captions, or translations, and does not sell
+        or share your data with anyone. The only data that ever leaves your
+        device is what you explicitly send to a translation provider you
+        configure yourself (see below) — or, if you opt into the separate,
+        paid Managed subscription tier, what's needed to authenticate and
+        meter that subscription.
+      </p>
+    </div>
+
+    <h2>What the extension reads</h2>
+    <table>
+      <tr>
+        <th>Data</th>
+        <th>What happens to it</th>
+      </tr>
+      <tr>
+        <td>Caption/transcript text from the YouTube video open in your active tab</td>
+        <td>
+          Read locally to build flashcards. Sent off your device only if
+          you've configured your own translation provider (see below) — a
+          request goes directly from your browser to that provider, never
+          through vidlingo's own servers, unless you've opted into the
+          Managed tier.
+        </td>
+      </tr>
+      <tr>
+        <td>Your saved library (decks, cards, bookmarks)</td>
+        <td>Stored only in this browser's local storage (<code>chrome.storage.local</code>). Never transmitted anywhere.</td>
+      </tr>
+      <tr>
+        <td>Downloaded dictionary/tokenizer data (per learning language)</td>
+        <td>
+          Fetched, after your confirmation, from a public GitHub repository
+          hosting static files — no personal data is sent to request these,
+          and nothing downloads without you confirming it first. Stored
+          locally (IndexedDB).
+        </td>
+      </tr>
+    </table>
+
+    <h2>Translation providers (bring your own key)</h2>
+    <p>
+      Translation is provided by whichever option you choose in Settings:
+    </p>
+    <ul>
+      <li><strong>Chrome's built-in on-device translator</strong> — nothing ever leaves your device.</li>
+      <li><strong>DeepL, LibreTranslate, or an LLM API endpoint</strong> — your API key is stored only in this browser's local storage, and requests go directly from your browser to that provider.</li>
+      <li>
+        <strong>Managed (optional, paid subscription)</strong> — for people who
+        don't want to manage their own key. If you opt in, caption text you
+        translate is sent to Fluxora's backend, which forwards it to an
+        upstream translation provider on your behalf, and an authentication
+        token (via Clerk) plus subscription/usage state is stored to verify
+        your subscription. This tier is off by default and requires an
+        explicit sign-up.
+      </li>
+    </ul>
+
+    <h2>What we don't do</h2>
+    <ul>
+      <li>We don't sell or share your data with third parties.</li>
+      <li>We don't track your browsing history beyond the single active tab's current YouTube URL, read only to know which video is open.</li>
+      <li>We don't show ads or use your data for advertising.</li>
+      <li>We don't use your data to determine creditworthiness or for lending purposes.</li>
+    </ul>
+
+    <h2>Permissions this extension requests</h2>
+    <table>
+      <tr><th>Permission</th><th>Why</th></tr>
+      <tr><td><code>storage</code></td><td>Saves your library and downloaded dictionaries locally on this device.</td></tr>
+      <tr><td><code>sidePanel</code></td><td>The entire UI is a side panel next to the video, not a popup.</td></tr>
+      <tr><td><code>cookies</code></td><td>Required by the sign-in library used only for the optional Managed tier — unused otherwise.</td></tr>
+      <tr><td>Host access to <code>youtube.com</code></td><td>Reads the transcript already visible on the page you have open, and adds playback controls to it.</td></tr>
+    </table>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes, the "Last updated" date above will change, and
+      material changes will be reflected in the extension's own Chrome Web
+      Store listing.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy or vidlingo's data handling? Open an issue
+      on the project's GitHub repository.
+    </p>
+  </body>
+</html>
