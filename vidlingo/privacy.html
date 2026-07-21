@@ -96,9 +96,7 @@
         receives your videos, captions, or translations, and does not sell
         or share your data with anyone. The only data that ever leaves your
         device is what you explicitly send to a translation provider you
-        configure yourself (see below) — or, if you opt into the separate,
-        paid Managed subscription tier, what's needed to authenticate and
-        meter that subscription.
+        configure yourself (see below).
       </p>
     </div>
 
@@ -112,10 +110,9 @@
         <td>Caption/transcript text from the YouTube video open in your active tab</td>
         <td>
           Read locally to build flashcards. Sent off your device only if
-          you've configured your own translation provider (see below) — a
-          request goes directly from your browser to that provider, never
-          through vidlingo's own servers, unless you've opted into the
-          Managed tier.
+          you've configured your own LLM translation provider (see below) —
+          a request goes directly from your browser to that provider, never
+          through vidlingo's own servers.
         </td>
       </tr>
       <tr>
@@ -139,16 +136,7 @@
     </p>
     <ul>
       <li><strong>Chrome's built-in on-device translator</strong> — nothing ever leaves your device.</li>
-      <li><strong>DeepL, LibreTranslate, or an LLM API endpoint</strong> — your API key is stored only in this browser's local storage, and requests go directly from your browser to that provider.</li>
-      <li>
-        <strong>Managed (optional, paid subscription)</strong> — for people who
-        don't want to manage their own key. If you opt in, caption text you
-        translate is sent to Fluxora's backend, which forwards it to an
-        upstream translation provider on your behalf, and an authentication
-        token (via Clerk) plus subscription/usage state is stored to verify
-        your subscription. This tier is off by default and requires an
-        explicit sign-up.
-      </li>
+      <li><strong>Any OpenAI-compatible LLM API endpoint</strong> (OpenAI, Groq, OpenRouter, a local LM Studio/Ollama server, etc.) — your API key is stored only in this browser's local storage, and requests go directly from your browser to that endpoint.</li>
     </ul>
 
     <h2>What we don't do</h2>
@@ -164,8 +152,9 @@
       <tr><th>Permission</th><th>Why</th></tr>
       <tr><td><code>storage</code></td><td>Saves your library and downloaded dictionaries locally on this device.</td></tr>
       <tr><td><code>sidePanel</code></td><td>The entire UI is a side panel next to the video, not a popup.</td></tr>
-      <tr><td><code>cookies</code></td><td>Required by the sign-in library used only for the optional Managed tier — unused otherwise.</td></tr>
+      <tr><td><code>cookies</code></td><td>Required by a sign-in library the extension bundles but does not currently expose any sign-in flow for — unused in this build.</td></tr>
       <tr><td>Host access to <code>youtube.com</code></td><td>Reads the transcript already visible on the page you have open, and adds playback controls to it.</td></tr>
+      <tr><td>Host access to <code>github.com</code> / <code>githubusercontent.com</code></td><td>Downloads a language's dictionary/tokenizer data, only after you confirm — these are public, read-only reference files, not personal data.</td></tr>
     </table>
 
     <h2>Changes to this policy</h2>
