@@ -43,6 +43,75 @@
       .back:hover {
         text-decoration: underline;
       }
+      /* Same hand-drawn line-art treatment as .hint-arrow below, sharing
+         its color — a coffee cup (Ko-fi's own "buy me a coffee" framing)
+         with a small heart rising in the steam, so the card reads as an
+         illustration with a label rather than a label alone. */
+      .mug {
+        display: block;
+        margin: 0 auto 18px;
+      }
+      .mug .cup {
+        stroke: #b45309;
+      }
+      .mug .steam {
+        stroke: #b45309;
+        opacity: 0.6;
+      }
+      .mug .heart {
+        fill: #b45309;
+      }
+      /* Points from the card down to Ko-fi's own floating button — it only
+         renders in a fixed bottom-left position (see the script comment
+         below), so this is a fixed-position overlay tuned to that same
+         corner rather than something laid out relative to the card itself.
+         Hidden below 700px: the card fills most of a narrow viewport at
+         that width, leaving no room for the curve to read as intentional. */
+      .hint-arrow {
+        position: fixed;
+        left: 48px;
+        bottom: 88px;
+        width: 180px;
+        height: 320px;
+        pointer-events: none;
+      }
+      .hint-arrow path {
+        stroke: #b45309;
+      }
+      .hint-arrow .stem {
+        stroke-dasharray: 480;
+        stroke-dashoffset: 480;
+        animation: draw-arrow 1.3s 0.4s ease-out forwards;
+      }
+      .hint-arrow .head {
+        opacity: 0;
+        animation: fade-head 0.3s 1.3s ease-out forwards;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hint-arrow .stem {
+          animation: none;
+          stroke-dashoffset: 0;
+        }
+        .hint-arrow .head {
+          animation: none;
+          opacity: 1;
+        }
+      }
+      @keyframes draw-arrow {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes fade-head {
+        to {
+          opacity: 1;
+        }
+      }
+      @media (max-width: 700px) {
+        .hint-arrow {
+          display: none;
+        }
+      }
       /* Kept last on purpose — see vidlingo-homepage.html's own comment on
          why an earlier dark-mode block loses to later unconditional rules
          of the same specificity regardless of the media query matching. */
@@ -58,14 +127,79 @@
         .back {
           color: #a1a1aa;
         }
+        .hint-arrow path {
+          stroke: #f0b429;
+        }
+        .mug .cup,
+        .mug .steam {
+          stroke: #f0b429;
+        }
+        .mug .heart {
+          fill: #f0b429;
+        }
       }
     </style>
   </head>
   <body>
     <div class="card">
+      <svg
+        class="mug"
+        viewBox="0 0 88 88"
+        width="76"
+        height="76"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path class="steam" d="M30 34 C 26 29, 32 25, 28 19" stroke-width="2.5" stroke-linecap="round" />
+        <path class="steam" d="M54 34 C 58 29, 52 25, 56 19" stroke-width="2.5" stroke-linecap="round" />
+        <path
+          class="heart"
+          d="M42 6 C 42 2 36 2 36 7 C 36 11 42 15 42 18 C 42 15 48 11 48 7 C 48 2 42 2 42 6 Z"
+        />
+        <path
+          class="cup"
+          d="M22 34 L26 64 Q26 70 32 70 L52 70 Q58 70 58 64 L62 34 Z"
+          stroke-width="3"
+          stroke-linejoin="round"
+        />
+        <path class="cup" d="M62 40 Q76 40 76 52 Q76 64 62 62" stroke-width="3" />
+      </svg>
       <h1 id="heading">Support vidlingo</h1>
       <a class="back" id="back" href="https://usefluxora.com/vidlingo/">← Back to vidlingo</a>
     </div>
+
+    <!-- Purely decorative — the card above sits alone in a lot of empty
+         space with the real call-to-action (Ko-fi's floating button, drawn
+         by the script below) tucked in the bottom-left corner. A hand-drawn-
+         style curved arrow, not a straight ruled line, points from the card
+         toward it so the corner reads as "the rest of this page" rather
+         than an unrelated stray element. `aria-hidden`: adds nothing a
+         screen reader needs — the destination is already a real button
+         with its own label. -->
+    <svg
+      class="hint-arrow"
+      viewBox="0 0 180 320"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        class="stem"
+        d="M 158 10 C 120 55, 145 110, 95 145 C 55 175, 85 210, 45 240 C 30 255, 24 270, 22 286"
+        stroke-width="3"
+        stroke-linecap="round"
+        fill="none"
+      />
+      <path
+        class="head"
+        d="M 8 280 L 22 300 L 36 282"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+      />
+    </svg>
 
     <!-- Ko-fi's own officially-supported widget — confirmed live: their raw
          `?widget=true&embed=true` iframe embed sits behind a Cloudflare
