@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support vidlingo</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: #18181b;
+        background: #fafafa;
+      }
+      .card {
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 16px;
+        padding: 44px 40px;
+        text-align: center;
+        max-width: 320px;
+      }
+      h1 {
+        font-size: 19px;
+        margin: 0;
+      }
+      .back {
+        display: inline-block;
+        margin-top: 28px;
+        font-size: 13px;
+        color: #71717a;
+        text-decoration: none;
+      }
+      .back:hover {
+        text-decoration: underline;
+      }
+      /* Kept last on purpose — see vidlingo-homepage.html's own comment on
+         why an earlier dark-mode block loses to later unconditional rules
+         of the same specificity regardless of the media query matching. */
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #e4e4e7;
+          background: #0a0a0f;
+        }
+        .card {
+          background: #141419;
+          border-color: #27272a;
+        }
+        .back {
+          color: #a1a1aa;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1 id="heading">Support vidlingo</h1>
+      <a class="back" id="back" href="https://usefluxora.com/vidlingo/">← Back to vidlingo</a>
+    </div>
+
+    <!-- Ko-fi's own officially-supported widget — confirmed live: their raw
+         `?widget=true&embed=true` iframe embed sits behind a Cloudflare
+         bot-check and renders blank; the older inline-button API
+         (kofiwidget2.js) no longer defines anything at all (dead script);
+         this script-based floating button is the one integration
+         confirmed to actually render and open its donation popup with no
+         page navigation. It only supports `type: 'floating-chat'` (checked
+         the script source directly) — a fixed bottom-left position, not
+         configurable to render inside the card above (a centering
+         override was tried and silently ignored) — a deliberate trade-off
+         to keep the real popup rather than falling back to a plain
+         outbound link. -->
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script>
+      // This page's own tiny bit of copy — deliberately not a framework/
+      // i18next dependency for two strings. `lang` mirrors the extension's
+      // own UiLanguage codes (settings.ts) so the same query param the
+      // extension already knows how to send just works; unrecognized/
+      // missing values fall back to English. "zh" (Simplified) isn't
+      // listed here since the extension sends those visitors to
+      // vidlingo-support-zh.html (Afdian) instead of this page at all —
+      // "zh-Hant" (Traditional, Taiwan/HK) IS listed here on purpose: it
+      // stays on Ko-fi (see settings-panel.tsx's getDonateUrl), since
+      // Afdian is a mainland-China-oriented platform Traditional-reading
+      // users don't need and Ko-fi already works fine for.
+      var STRINGS = {
+        en: { heading: "Support vidlingo", back: "← Back to vidlingo" },
+        ja: { heading: "vidlingo を応援する", back: "← vidlingo に戻る" },
+        de: { heading: "vidlingo unterstützen", back: "← Zurück zu vidlingo" },
+        fr: { heading: "Soutenir vidlingo", back: "← Retour à vidlingo" },
+        pt: { heading: "Apoiar o vidlingo", back: "← Voltar ao vidlingo" },
+        es: { heading: "Apoyar a vidlingo", back: "← Volver a vidlingo" },
+        ko: { heading: "vidlingo 후원하기", back: "← vidlingo로 돌아가기" },
+        "zh-Hant": { heading: "支持 vidlingo", back: "← 返回 vidlingo" },
+      };
+      var lang = new URLSearchParams(location.search).get("lang");
+      var t = STRINGS[lang] || STRINGS.en;
+      document.title = t.heading;
+      document.getElementById("heading").textContent = t.heading;
+      document.getElementById("back").textContent = t.back;
+
+      kofiWidgetOverlay.draw("fluxora", {
+        type: "floating-chat",
+        "floating-chat.donateButton.text": "Support me",
+        "floating-chat.donateButton.background-color": "#92400e",
+        "floating-chat.donateButton.text-color": "#fff",
+      });
+    </script>
+  </body>
+</html>

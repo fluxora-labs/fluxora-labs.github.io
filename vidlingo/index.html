@@ -4,45 +4,245 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>vidlingo — Bilingual subtitle flashcards for YouTube</title>
+    <meta
+      name="description"
+      content="Turn any YouTube video into bilingual subtitle flashcards, right in a side panel next to the video. Bring your own translation provider — nothing relayed through vidlingo's own servers."
+    />
     <style>
       :root {
         color-scheme: light dark;
+        --ink: #18181b;
+        --muted: #52525b;
+        --faint: #71717a;
+        --canvas: #fafafa;
+        --surface: #ffffff;
+        --border: #e4e4e7;
+        --accent: #4f46e5;
+        --accent-soft: #eef2ff;
+      }
+      * {
+        box-sizing: border-box;
       }
       body {
-        max-width: 720px;
+        max-width: 880px;
         margin: 0 auto;
-        padding: 48px 24px 96px;
+        padding: 56px 24px 96px;
         font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
         line-height: 1.6;
-        color: #18181b;
-        background: #fafafa;
+        color: var(--ink);
+        background: var(--canvas);
       }
-      @media (prefers-color-scheme: dark) {
-        body {
-          color: #e4e4e7;
-          background: #0a0a0f;
-        }
-        a {
-          color: #a78bfa;
-        }
-        .card {
-          background: #141419;
-          border-color: #27272a;
-        }
+      a {
+        color: var(--accent);
       }
-      h1 {
-        font-size: 28px;
-        margin-bottom: 4px;
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
-      .tagline {
-        color: #71717a;
-        font-size: 15px;
-        margin-bottom: 32px;
+      .logo-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: #fff;
+        flex-shrink: 0;
       }
-      h2 {
+      .logo-mark svg {
+        width: 17px;
+        height: 17px;
+      }
+      .logo-word {
         font-size: 19px;
-        margin-top: 40px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
       }
+      .logo-word b {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 20px;
+      }
+      nav a:hover {
+        color: var(--ink);
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 36px;
+        align-items: center;
+        margin-top: 56px;
+      }
+      .hero h1 {
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin: 0 0 16px;
+      }
+      .hero .tagline {
+        color: var(--muted);
+        font-size: 16.5px;
+        max-width: 46ch;
+        margin: 0 0 24px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 7px 14px;
+      }
+      .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+      .hero-shot {
+        display: flex;
+        justify-content: center;
+      }
+      .frame {
+        width: min(280px, 100%);
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        box-shadow: 0 24px 60px rgba(24, 24, 27, 0.12);
+        overflow: hidden;
+      }
+      .frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Section headings */
+      h2 {
+        font-size: 22px;
+        letter-spacing: -0.01em;
+        margin: 0 0 6px;
+      }
+      section {
+        margin-top: 72px;
+      }
+      .section-lead {
+        color: var(--muted);
+        font-size: 15px;
+        margin: 0 0 28px;
+        max-width: 60ch;
+      }
+
+      /* How it works */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 16px;
+      }
+      .step {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .step .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .step h3 {
+        font-size: 15.5px;
+        margin: 0 0 6px;
+      }
+      .step p {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* Feature grid */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .feature {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .feature .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .feature .icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .feature h3 {
+        font-size: 15.5px;
+        margin: 0 0 6px;
+      }
+      .feature p {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* Screenshot strip */
+      .shots {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .shots .frame {
+        width: 100%;
+      }
+      .shots figcaption {
+        text-align: center;
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+      figure {
+        margin: 0;
+      }
+
       code {
         background: rgba(127, 127, 127, 0.15);
         padding: 1px 5px;
@@ -50,66 +250,310 @@
         font-size: 0.9em;
       }
       .card {
-        background: #ffffff;
-        border: 1px solid #e4e4e7;
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 20px 24px;
-        margin: 20px 0;
       }
-      ul {
-        padding-left: 22px;
+      .support-lead {
+        color: var(--muted);
+        font-size: 14.5px;
+        margin-top: 6px;
       }
-      li {
-        margin-bottom: 6px;
+      .support-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          background-color 0.15s ease,
+          transform 0.1s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .btn-kofi {
+        background: #fef3e2;
+        border-color: #f3c581;
+        color: #92400e;
+      }
+      .btn-kofi:hover {
+        background: #fde8c8;
+      }
+      .btn-afdian {
+        background: #fdf0f6;
+        border-color: #f3a8c9;
+        color: #9d174d;
+      }
+      .btn-afdian:hover {
+        background: #fbe1ee;
+      }
+
+      footer {
+        margin-top: 72px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        font-size: 13.5px;
+        color: var(--faint);
+      }
+      footer a {
+        color: var(--faint);
+      }
+
+      /* Scroll reveal — a section starts very slightly lower + transparent
+         and settles into place once it enters the viewport (see the
+         IntersectionObserver script at the end of body). Skipped entirely
+         under reduced-motion: the rule below simply never applies, so
+         sections render in their final state from the first paint. */
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          opacity: 0;
+          transform: translateY(14px);
+          transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+        }
+        .reveal.is-visible {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (min-width: 640px) {
+        .hero {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
+      }
+
+      /* Kept last on purpose — equal-specificity selectors cascade in
+         source order, so a dark-mode override declared earlier than a
+         later unconditional rule (e.g. `.card`'s own base background)
+         loses to it even while the media query matches. Every override
+         below needs to out-rank a same-name rule already declared above. */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e4e4e7;
+          --muted: #a1a1aa;
+          --faint: #71717a;
+          --canvas: #0a0a0f;
+          --surface: #141419;
+          --border: #27272a;
+          --accent: #818cf8;
+          --accent-soft: rgba(129, 140, 248, 0.14);
+        }
+        .btn-kofi {
+          background: #2a1c0d;
+          border-color: #7c4a12;
+          color: #fbbf6a;
+        }
+        .btn-kofi:hover {
+          background: #3a2711;
+        }
+        .btn-afdian {
+          background: #2a1220;
+          border-color: #8a2f56;
+          color: #fb9dc0;
+        }
+        .btn-afdian:hover {
+          background: #391a2b;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>vidlingo</h1>
-    <p class="tagline">Bilingual subtitles + flashcards for any YouTube video, in a side panel.</p>
+    <header>
+      <div class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" />
+          </svg>
+        </span>
+        <span class="logo-word">vid<b>lingo</b></span>
+      </div>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#support">Support</a>
+      </nav>
+    </header>
 
-    <p>
-      vidlingo turns any YouTube video with captions into a set of bilingual
-      sentence flashcards — right in a side panel next to the video, so you
-      never have to switch tabs.
-    </p>
-
-    <h2>How it works</h2>
-    <ol>
-      <li>Open any YouTube video that has captions.</li>
-      <li>Click "Add to library." vidlingo reads the transcript and translates it using a provider you control.</li>
-      <li>
-        Review the deck: every sentence is a card with the original text, its
-        translation, and tap-to-look-up definitions for individual words.
-        Bookmark sentences or words you want to revisit, replay any segment
-        at a slower speed, and jump back into the video from any card.
-      </li>
-    </ol>
-
-    <h2>Learn in six languages</h2>
-    <p>
-      Japanese, Chinese, Korean, Spanish, French, and German are all
-      supported as source or target languages, with dictionary-backed word
-      lookup for each. Per-language dictionary data downloads on demand —
-      nothing is bundled you don't use.
-    </p>
-
-    <h2>Your own translation provider, your choice</h2>
-    <p>
-      vidlingo never sends your video/caption data through vidlingo's own
-      servers. Pick Chrome's built-in on-device translator (free, no key,
-      nothing leaves your device) or any OpenAI-compatible LLM API endpoint
-      you configure, with your own key stored only in this device's local
-      storage.
-    </p>
-
-    <div class="card" id="support">
-      <h2 style="margin-top: 0">Support</h2>
-      <p>
-        Questions, bug reports, or feedback: <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
-      </p>
+    <div class="hero">
+      <div>
+        <span class="badge"><span class="dot"></span> Coming soon to the Chrome Web Store</span>
+        <h1 style="margin-top: 16px">Turn any YouTube video into bilingual flashcards</h1>
+        <p class="tagline">
+          Right in a side panel next to the video — every caption line becomes a
+          card you can translate, tap word-by-word, bookmark, and replay at any speed.
+        </p>
+      </div>
+      <div class="hero-shot">
+        <div class="frame">
+          <img src="img/deck-cards.png" alt="vidlingo's side panel showing a deck of bilingual sentence flashcards next to a YouTube video" />
+        </div>
+      </div>
     </div>
 
-    <p><a href="/vidlingo/privacy.html">Privacy Policy</a></p>
+    <section id="how" class="reveal">
+      <h2>How it works</h2>
+      <p class="section-lead">No account, no upload — the whole flow happens in your own browser.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="num">1</span>
+          <h3>Open a video with captions</h3>
+          <p>Any YouTube video that has captions — auto-generated or manual, in any language.</p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <h3>Click "Add to library"</h3>
+          <p>vidlingo reads the transcript and translates it using a provider you control.</p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <h3>Review the deck</h3>
+          <p>Tap any word for its definition, bookmark what you want to revisit, replay slower.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Built for actually learning, not just translating</h2>
+      <p class="section-lead">Six languages with real dictionaries, your choice of translation provider, and nothing kept on a server you don't control.</p>
+      <div class="features">
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+          </span>
+          <h3>Six languages, real dictionaries</h3>
+          <p>Japanese, Chinese, Korean, Spanish, French, and German — dictionary-backed word lookup, downloaded on demand.</p>
+        </div>
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
+          </span>
+          <h3>Bring your own translation provider</h3>
+          <p>Chrome's on-device translator (free, no key) or any OpenAI-compatible LLM endpoint you configure.</p>
+        </div>
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg>
+          </span>
+          <h3>Bookmark words &amp; sentences</h3>
+          <p>Save anything you want to revisit, export/import your bookmarks as a plain JSON file.</p>
+        </div>
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg>
+          </span>
+          <h3>Replay at any speed</h3>
+          <p>Slow down a tricky sentence, or let a whole deck autoplay while you follow along.</p>
+        </div>
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+          </span>
+          <h3>100% local by default</h3>
+          <p>Your library lives in this browser only. No vidlingo server ever sees your videos or captions.</p>
+        </div>
+        <div class="feature">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="5" rx="2" ry="2" /><path d="M7 15h4M15 15h2M7 11h2M13 11h4" /></svg>
+          </span>
+          <h3>Works with real captions</h3>
+          <p>Auto-generated or manual — vidlingo reads whatever transcript the video already has.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>See it in action</h2>
+      <div class="shots">
+        <figure>
+          <div class="frame">
+            <img src="img/home-library.png" alt="vidlingo's library view with a saved deck" />
+          </div>
+          <figcaption>Your library, right where you're watching</figcaption>
+        </figure>
+        <figure>
+          <div class="frame">
+            <img src="img/settings.png" alt="vidlingo's settings panel showing translation source priority" />
+          </div>
+          <figcaption>Reorder translation sources like a priority list</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="card" id="support">
+        <h2 style="margin-top: 0">Support</h2>
+        <p>
+          Questions, bug reports, or feedback: <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
+        </p>
+        <p class="support-lead">
+          vidlingo is free and BYOK by design — no ads, no relaying your data through
+          vidlingo's own servers. If it's saved you time, a one-time coffee helps keep
+          it maintained.
+        </p>
+        <!-- Each links to its own dedicated, distraction-free page
+             (support.html/support-zh.html) rather than embedding a widget or
+             linking straight to ko-fi.com/ifdian.net here — same two pages
+             the extension's own Settings "Support this project" link opens,
+             so there's exactly one place either flow leads to per platform. -->
+        <div class="support-buttons">
+          <a class="btn btn-kofi" href="support.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" /><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z" /><line x1="6" y1="1" x2="6" y2="4" /><line x1="10" y1="1" x2="10" y2="4" /><line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
+            Buy me a coffee (Ko-fi)
+          </a>
+          <a class="btn btn-afdian" href="support-zh.html">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21s-6.7-4.35-9.3-8.4C.9 9.7 1.7 6 4.9 4.9c2-.7 4 .1 5.1 1.8 1.1-1.7 3.1-2.5 5.1-1.8 3.2 1.1 4 4.8 2.2 7.7C18.7 16.65 12 21 12 21Z" />
+            </svg>
+            爱发电 (mainland China)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="/vidlingo/privacy.html">Privacy Policy</a>
+    </footer>
+
+    <script>
+      // Scroll-reveal — plain IntersectionObserver, no animation library.
+      // No-op (and no visual effect at all, see the reduced-motion media
+      // query above) for anyone with prefers-reduced-motion set.
+      if ("IntersectionObserver" in window) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          observer.observe(el);
+        });
+      }
+    </script>
   </body>
 </html>
