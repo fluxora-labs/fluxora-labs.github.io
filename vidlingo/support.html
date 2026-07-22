@@ -4,6 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Support vidlingo</title>
+    <!-- The extension's own getDonateUrl (settings-panel.tsx) never sends a
+         Simplified-Chinese visitor here at all — it links straight to
+         support-zh.html (Afdian) instead, since that page's own comment
+         explains this page has no STRINGS entry for "zh" (only "zh-Hant"
+         stays on Ko-fi). But that's not the only way to land on a URL: a
+         shared link, a bookmark, a typo in a future integration. Without
+         this, ?lang=zh would silently fall back to English strings with no
+         hint a Chinese option even exists — a redirect here means the
+         *page itself* is correct standalone, not just correct for the one
+         path that currently reaches it. Placed before the Ko-fi widget
+         script tag so a redirected visitor never pays for loading it. -->
+    <script>
+      if (new URLSearchParams(location.search).get("lang") === "zh") {
+        location.replace("https://usefluxora.com/vidlingo/support-zh.html");
+      }
+    </script>
     <style>
       :root {
         color-scheme: light dark;
