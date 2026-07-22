@@ -226,15 +226,22 @@
       // stays on Ko-fi (see settings-panel.tsx's getDonateUrl), since
       // Afdian is a mainland-China-oriented platform Traditional-reading
       // users don't need and Ko-fi already works fine for.
+      // `button` only localizes the floating button's own visible label —
+      // confirmed by reading storage.ko-fi.com/cdn/scripts/overlay-widget.js
+      // directly, the popup it opens is Ko-fi's own hosted iframe
+      // (`ko-fi.com/{page}/?hidefeed=true&widget=true&embed=true`, built in
+      // loadKofiIframe()) with no language/locale parameter anywhere in the
+      // script or the URL it constructs — that content is entirely outside
+      // this page's control.
       var STRINGS = {
-        en: { heading: "Support vidlingo", back: "← Back to vidlingo" },
-        ja: { heading: "vidlingo を応援する", back: "← vidlingo に戻る" },
-        de: { heading: "vidlingo unterstützen", back: "← Zurück zu vidlingo" },
-        fr: { heading: "Soutenir vidlingo", back: "← Retour à vidlingo" },
-        pt: { heading: "Apoiar o vidlingo", back: "← Voltar ao vidlingo" },
-        es: { heading: "Apoyar a vidlingo", back: "← Volver a vidlingo" },
-        ko: { heading: "vidlingo 후원하기", back: "← vidlingo로 돌아가기" },
-        "zh-Hant": { heading: "支持 vidlingo", back: "← 返回 vidlingo" },
+        en: { heading: "Support vidlingo", back: "← Back to vidlingo", button: "Support me" },
+        ja: { heading: "vidlingo を応援する", back: "← vidlingo に戻る", button: "応援する" },
+        de: { heading: "vidlingo unterstützen", back: "← Zurück zu vidlingo", button: "Unterstützen" },
+        fr: { heading: "Soutenir vidlingo", back: "← Retour à vidlingo", button: "Soutenir" },
+        pt: { heading: "Apoiar o vidlingo", back: "← Voltar ao vidlingo", button: "Apoiar" },
+        es: { heading: "Apoyar a vidlingo", back: "← Volver a vidlingo", button: "Apoyar" },
+        ko: { heading: "vidlingo 후원하기", back: "← vidlingo로 돌아가기", button: "후원하기" },
+        "zh-Hant": { heading: "支持 vidlingo", back: "← 返回 vidlingo", button: "支持" },
       };
       var lang = new URLSearchParams(location.search).get("lang");
       var t = STRINGS[lang] || STRINGS.en;
@@ -244,7 +251,7 @@
 
       kofiWidgetOverlay.draw("fluxora", {
         type: "floating-chat",
-        "floating-chat.donateButton.text": "Support me",
+        "floating-chat.donateButton.text": t.button,
         "floating-chat.donateButton.background-color": "#92400e",
         "floating-chat.donateButton.text-color": "#fff",
       });
