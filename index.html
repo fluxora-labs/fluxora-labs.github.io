@@ -4,29 +4,42 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fluxora — An independent studio building small, focused tools</title>
-    <!-- Same teal "flow" mark as this page's own header below — kept as a
+    <!-- The studio's real brand mark (see store-assets/brand/ — the flowing-F
+         aurora monogram, gradient teal->indigo->magenta) rather than the
+         placeholder "flow lines" glyph this page started with — kept as a
          self-contained data URI (not a separate file) so there's nothing
-         extra for `just publishSite` to copy across. -->
+         extra for `just publishSite` to copy across, same reasoning as the
+         icon it replaces. Same path data as the header's own .brand-mark
+         SVG below, just carrying its own gradient fill since a favicon has
+         no CSS to inherit one from. -->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230f766e'/%3E%3Cpath d='M4 6c3 0 3 4 6 4s3-4 6-4 3 4 6 4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M4 12c3 0 3 4 6 4s3-4 6-4 3 4 6 4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='512' y2='512' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%230d9488'/%3E%3Cstop offset='0.5' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23c026d3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23a)'/%3E%3Cpath d='M 176 130 C 150 130, 150 170, 176 172 C 230 176, 320 150, 372 118 C 388 108, 400 128, 386 142 C 330 184, 240 214, 178 210 C 176 210, 176 210, 176 210 C 172 244, 210 250, 250 240 C 290 230, 322 206, 344 184 C 358 170, 378 188, 366 204 C 336 240, 282 270, 226 276 C 204 278, 176 270, 176 270 L 176 400 C 176 424, 138 424, 138 400 L 138 156 C 138 138, 155 130, 176 130 Z' fill='%23fff'/%3E%3C/svg%3E"
     />
+    <!-- Matches the new brand accent (indigo, the gradient's own middle
+         stop) — light/dark variants so the browser chrome/status-bar tint
+         tracks whichever theme actually renders, same split the page's own
+         CSS already does via prefers-color-scheme. -->
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#818cf8" media="(prefers-color-scheme: dark)" />
     <style>
       :root {
         color-scheme: light dark;
         /* Same token names/shape as vidlingo-homepage.html's own system —
-           different values (a slate/teal "flow" hue instead of vidlingo's
-           indigo) so this page reads as the studio's own identity, not a
-           re-skinned copy of one project's page. */
+           `--accent` is the aurora brand mark's own middle gradient stop
+           (indigo), not vidlingo's own slightly different indigo
+           (#4f46e5) — close enough to read as the same studio family,
+           distinct enough that this page doesn't look like a re-skinned
+           copy of one project's page. */
         --ink: #18181b;
         --muted: #52525b;
         --faint: #71717a;
         --canvas: #fafafa;
         --surface: #ffffff;
         --border: #e4e4e7;
-        --accent: #0f766e;
-        --accent-soft: #ecfdf9;
+        --accent: #6366f1;
+        --accent-soft: #eef2ff;
       }
       * {
         box-sizing: border-box;
@@ -48,10 +61,11 @@
         align-items: center;
         gap: 11px;
       }
-      /* A simple three-thread "flow" mark — three lines converging into one,
-         the plainest visual metaphor for "Fluxora" (flux/flow) that doesn't
-         borrow vidlingo's own translation-arrows glyph. Signature element
-         for this specific page, kept to exactly one place. */
+      /* The studio's real brand mark — a flowing "F" ribbon monogram on the
+         same three-stop aurora gradient (teal->indigo->magenta) as the
+         favicon and store-assets/brand/'s own avatar files, replacing the
+         placeholder two-line "flow" glyph this page started with. Signature
+         element for this specific page, kept to exactly one place. */
       .brand-mark {
         display: flex;
         align-items: center;
@@ -59,7 +73,7 @@
         width: 34px;
         height: 34px;
         border-radius: 9px;
-        background: var(--accent);
+        background: linear-gradient(135deg, #0d9488, #6366f1, #c026d3);
         color: #fff;
         flex-shrink: 0;
       }
@@ -142,21 +156,36 @@
           --canvas: #0a0a0f;
           --surface: #141419;
           --border: #27272a;
-          --accent: #2dd4bf;
-          --accent-soft: rgba(45, 212, 191, 0.12);
+          --accent: #818cf8;
+          --accent-soft: rgba(129, 140, 248, 0.12);
         }
-        .brand-mark {
-          color: #062a26;
-        }
+        /* No .brand-mark override needed here — it's a saturated gradient
+           box with a solid-white glyph on top, not a flat accent-colored
+           one, so it reads fine against either canvas as-is. */
       }
     </style>
   </head>
   <body>
     <div class="brand">
       <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M4 6c3 0 3 4 6 4s3-4 6-4 3 4 6 4" />
-          <path d="M4 12c3 0 3 4 6 4s3-4 6-4 3 4 6 4" />
+        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+          <path
+            d="M 176 130
+               C 150 130, 150 170, 176 172
+               C 230 176, 320 150, 372 118
+               C 388 108, 400 128, 386 142
+               C 330 184, 240 214, 178 210
+               C 176 210, 176 210, 176 210
+               C 172 244, 210 250, 250 240
+               C 290 230, 322 206, 344 184
+               C 358 170, 378 188, 366 204
+               C 336 240, 282 270, 226 276
+               C 204 278, 176 270, 176 270
+               L 176 400
+               C 176 424, 138 424, 138 400
+               L 138 156
+               C 138 138, 155 130, 176 130 Z"
+          />
         </svg>
       </span>
       <h1>Fluxora</h1>
