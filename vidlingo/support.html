@@ -247,7 +247,7 @@
     </style>
   </head>
   <body>
-    <a class="brand" href="https://usefluxora.com/vidlingo/">
+    <a class="brand" id="brand" href="https://usefluxora.com/vidlingo/">
       <span class="brand-mark">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
           <path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" />
@@ -399,6 +399,18 @@
       document.title = t.heading;
       document.getElementById("heading").textContent = t.heading;
       document.getElementById("back").textContent = t.back;
+
+      // Both links back to the homepage only ever pointed at the bare
+      // "https://usefluxora.com/vidlingo/" URL — translating `.back`'s own
+      // text above (t.back) made it *look* localized, but clicking either
+      // link always dropped straight back to English on the next page.
+      // Appended only when non-English, mirroring homepage.html's own
+      // privacy-link fix.
+      if (lang && lang !== "en" && STRINGS[lang]) {
+        var query = "?lang=" + encodeURIComponent(lang);
+        document.getElementById("back").href = "https://usefluxora.com/vidlingo/" + query;
+        document.getElementById("brand").href = "https://usefluxora.com/vidlingo/" + query;
+      }
 
       kofiWidgetOverlay.draw("fluxora", {
         type: "floating-chat",

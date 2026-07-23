@@ -123,7 +123,7 @@
   </head>
   <body>
     <div class="top-nav">
-      <a href="https://usefluxora.com/vidlingo/" data-i18n="backLink">← Back to vidlingo</a>
+      <a id="back-link" href="https://usefluxora.com/vidlingo/" data-i18n="backLink">← Back to vidlingo</a>
       <select id="lang-switcher" aria-label="Language"></select>
     </div>
 
@@ -697,6 +697,16 @@
           var key = el.getAttribute("data-i18n");
           if (t[key]) el.textContent = t[key];
         });
+
+        // The [data-i18n] loop above only ever translated this link's
+        // *text* — the href stayed the bare English homepage URL
+        // regardless, so clicking "back" from a non-English visit always
+        // dropped back to English. Mirrors homepage.html's own
+        // privacy-link fix.
+        var backLink = document.getElementById("back-link");
+        if (backLink && lang !== "en") {
+          backLink.href = "https://usefluxora.com/vidlingo/?lang=" + encodeURIComponent(lang);
+        }
 
         var select = document.getElementById("lang-switcher");
         LANGS.forEach(function (entry) {
