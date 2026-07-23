@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>vidlingo — Privacy Policy</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%234f46e5'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 6 6'/%3E%3Cpath d='m4 14 6-6 2-3'/%3E%3Cpath d='M2 5h12'/%3E%3Cpath d='M7 2h1'/%3E%3Cpath d='m22 22-5-10-5 10'/%3E%3Cpath d='M14 18h6'/%3E%3C/g%3E%3C/svg%3E"
+    />
     <style>
       :root {
         color-scheme: light dark;
@@ -16,19 +21,6 @@
         line-height: 1.6;
         color: #18181b;
         background: #fafafa;
-      }
-      @media (prefers-color-scheme: dark) {
-        body {
-          color: #e4e4e7;
-          background: #0a0a0f;
-        }
-        a {
-          color: #a78bfa;
-        }
-        .card {
-          background: #141419;
-          border-color: #27272a;
-        }
       }
       h1 {
         font-size: 28px;
@@ -75,22 +67,79 @@
         padding: 20px 24px;
         margin: 20px 0;
       }
+      .top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+      }
+      .top-nav a {
+        font-size: 13px;
+        color: #71717a;
+        text-decoration: none;
+      }
+      .top-nav a:hover {
+        text-decoration: underline;
+      }
+      #lang-switcher {
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        color: #71717a;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 999px;
+        padding: 6px 10px;
+      }
+      /* Kept last on purpose — see vidlingo-homepage.html's own comment on
+         why an earlier dark-mode block loses to a later unconditional rule
+         of the same specificity regardless of the media query matching.
+         (This file used to declare its dark-mode `.card` override *before*
+         `.card`'s own base rule above, at the top of the stylesheet — the
+         base rule's `background: #ffffff` always won regardless of color
+         scheme, silently breaking dark mode for both cards on this page.) */
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #e4e4e7;
+          background: #0a0a0f;
+        }
+        a {
+          color: #a78bfa;
+        }
+        .card {
+          background: #141419;
+          border-color: #27272a;
+        }
+        .top-nav a {
+          color: #a1a1aa;
+        }
+        #lang-switcher {
+          background: #141419;
+          border-color: #27272a;
+          color: #a1a1aa;
+        }
+      }
     </style>
   </head>
   <body>
-    <h1>vidlingo — Privacy Policy</h1>
-    <p class="updated">Last updated: 2026-07-21</p>
+    <div class="top-nav">
+      <a href="https://usefluxora.com/vidlingo/" data-i18n="backLink">← Back to vidlingo</a>
+      <select id="lang-switcher" aria-label="Language"></select>
+    </div>
 
-    <p>
+    <h1 data-i18n="title">vidlingo — Privacy Policy</h1>
+    <p class="updated"><span data-i18n="updatedLabel">Last updated:</span> 2026-07-21</p>
+
+    <p data-i18n="intro">
       vidlingo (the browser extension, published by Fluxora) turns any YouTube
       video with captions into bilingual sentence flashcards, shown in a side
       panel next to the video. This page explains what data the extension
       touches, what it stores, and — importantly — what it never does.
     </p>
 
-    <h2>The short version</h2>
+    <h2 data-i18n="shortVersionHeading">The short version</h2>
     <div class="card">
-      <p>
+      <p data-i18n="shortVersionBody">
         Your saved decks/flashcards stay on your own device, in this
         browser's local storage. vidlingo does not run its own server that
         receives your videos, captions, or translations, and does not sell
@@ -100,15 +149,15 @@
       </p>
     </div>
 
-    <h2>What the extension reads</h2>
+    <h2 data-i18n="readsHeading">What the extension reads</h2>
     <table>
       <tr>
-        <th>Data</th>
-        <th>What happens to it</th>
+        <th data-i18n="readsColData">Data</th>
+        <th data-i18n="readsColHappens">What happens to it</th>
       </tr>
       <tr>
-        <td>Caption/transcript text from the YouTube video open in your active tab</td>
-        <td>
+        <td data-i18n="reads1Data">Caption/transcript text from the YouTube video open in your active tab</td>
+        <td data-i18n="reads1Happens">
           Read locally to build flashcards. Sent off your device only if
           you've configured your own LLM translation provider (see below) —
           a request goes directly from your browser to that provider, never
@@ -116,12 +165,12 @@
         </td>
       </tr>
       <tr>
-        <td>Your saved library (decks, cards, bookmarks)</td>
-        <td>Stored only in this browser's local storage (<code>chrome.storage.local</code>). Never transmitted anywhere.</td>
+        <td data-i18n="reads2Data">Your saved library (decks, cards, bookmarks)</td>
+        <td><span data-i18n="reads2Happens">Stored only in this browser's local storage (</span><code>chrome.storage.local</code><span data-i18n="reads2HappensEnd">). Never transmitted anywhere.</span></td>
       </tr>
       <tr>
-        <td>Downloaded dictionary/tokenizer data (per learning language)</td>
-        <td>
+        <td data-i18n="reads3Data">Downloaded dictionary/tokenizer data (per learning language)</td>
+        <td data-i18n="reads3Happens">
           Fetched, after your confirmation, from a public GitHub repository
           hosting static files — no personal data is sent to request these,
           and nothing downloads without you confirming it first. Stored
@@ -130,45 +179,541 @@
       </tr>
     </table>
 
-    <h2>Translation providers (bring your own key)</h2>
-    <p>
+    <h2 data-i18n="providersHeading">Translation providers (bring your own key)</h2>
+    <p data-i18n="providersLead">
       Translation is provided by whichever option you choose in Settings:
     </p>
     <ul>
-      <li><strong>Chrome's built-in on-device translator</strong> — nothing ever leaves your device.</li>
-      <li><strong>Any OpenAI-compatible LLM API endpoint</strong> (OpenAI, Groq, OpenRouter, a local LM Studio/Ollama server, etc.) — your API key is stored only in this browser's local storage, and requests go directly from your browser to that endpoint.</li>
+      <li><strong data-i18n="providersItem1Strong">Chrome's built-in on-device translator</strong> <span data-i18n="providersItem1Rest">— nothing ever leaves your device.</span></li>
+      <li><strong data-i18n="providersItem2Strong">Any OpenAI-compatible LLM API endpoint</strong> <span data-i18n="providersItem2Rest">(OpenAI, Groq, OpenRouter, a local LM Studio/Ollama server, etc.) — your API key is stored only in this browser's local storage, and requests go directly from your browser to that endpoint.</span></li>
     </ul>
 
-    <h2>What we don't do</h2>
+    <h2 data-i18n="dontHeading">What we don't do</h2>
     <ul>
-      <li>We don't sell or share your data with third parties.</li>
-      <li>We don't track your browsing history beyond the single active tab's current YouTube URL, read only to know which video is open.</li>
-      <li>We don't show ads or use your data for advertising.</li>
-      <li>We don't use your data to determine creditworthiness or for lending purposes.</li>
+      <li data-i18n="dont1">We don't sell or share your data with third parties.</li>
+      <li data-i18n="dont2">We don't track your browsing history beyond the single active tab's current YouTube URL, read only to know which video is open.</li>
+      <li data-i18n="dont3">We don't show ads or use your data for advertising.</li>
+      <li data-i18n="dont4">We don't use your data to determine creditworthiness or for lending purposes.</li>
     </ul>
 
-    <h2>Permissions this extension requests</h2>
+    <h2 data-i18n="permsHeading">Permissions this extension requests</h2>
     <table>
-      <tr><th>Permission</th><th>Why</th></tr>
-      <tr><td><code>storage</code></td><td>Saves your library and downloaded dictionaries locally on this device.</td></tr>
-      <tr><td><code>sidePanel</code></td><td>The entire UI is a side panel next to the video, not a popup.</td></tr>
-      <tr><td><code>cookies</code></td><td>Required by a sign-in library the extension bundles but does not currently expose any sign-in flow for — unused in this build.</td></tr>
-      <tr><td>Host access to <code>youtube.com</code></td><td>Reads the transcript already visible on the page you have open, and adds playback controls to it.</td></tr>
-      <tr><td>Host access to <code>github.com</code> / <code>githubusercontent.com</code></td><td>Downloads a language's dictionary/tokenizer data, only after you confirm — these are public, read-only reference files, not personal data.</td></tr>
+      <tr><th data-i18n="permsColPermission">Permission</th><th data-i18n="permsColWhy">Why</th></tr>
+      <tr><td><code>storage</code></td><td data-i18n="perms1Why">Saves your library and downloaded dictionaries locally on this device.</td></tr>
+      <tr><td><code>sidePanel</code></td><td data-i18n="perms2Why">The entire UI is a side panel next to the video, not a popup.</td></tr>
+      <tr><td><code>cookies</code></td><td data-i18n="perms3Why">Required by a sign-in library the extension bundles but does not currently expose any sign-in flow for — unused in this build.</td></tr>
+      <tr><td><span data-i18n="perms4Label">Host access to</span> <code>youtube.com</code></td><td data-i18n="perms4Why">Reads the transcript already visible on the page you have open, and adds playback controls to it.</td></tr>
+      <tr><td><span data-i18n="perms5Label">Host access to</span> <code>github.com</code> / <code>githubusercontent.com</code></td><td data-i18n="perms5Why">Downloads a language's dictionary/tokenizer data, only after you confirm — these are public, read-only reference files, not personal data.</td></tr>
     </table>
 
-    <h2>Changes to this policy</h2>
-    <p>
+    <h2 data-i18n="changesHeading">Changes to this policy</h2>
+    <p data-i18n="changesBody">
       If this policy changes, the "Last updated" date above will change, and
       material changes will be reflected in the extension's own Chrome Web
       Store listing.
     </p>
 
     <div class="card" id="support">
-      <h2 style="margin-top: 0">Contact</h2>
+      <h2 style="margin-top: 0" data-i18n="contactHeading">Contact</h2>
       <p>
-        If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at: <a href="mailto:privacy@usefluxora.com">privacy@usefluxora.com</a>
+        <span data-i18n="contactLead">If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at:</span> <a href="mailto:privacy@usefluxora.com">privacy@usefluxora.com</a>
       </p>
     </div>
+
+    <script>
+      // Same `?lang=`/switcher convention as vidlingo-homepage.html — see
+      // its own comment. Table/list rows with an embedded `<code>` or a
+      // fixed proper noun keep that piece out of `data-i18n` (split into a
+      // separate `<span>` alongside it) so translating the sentence around
+      // it never risks mangling the literal permission/API name.
+      var LANGS = [
+        { code: "en", label: "English" },
+        { code: "ja", label: "日本語" },
+        { code: "zh", label: "中文（简体）" },
+        { code: "zh-Hant", label: "中文（繁體）" },
+        { code: "ko", label: "한국어" },
+        { code: "es", label: "Español" },
+        { code: "fr", label: "Français" },
+        { code: "de", label: "Deutsch" },
+        { code: "pt", label: "Português" },
+      ];
+
+      var STRINGS = {
+        en: {
+          pageTitle: "vidlingo — Privacy Policy",
+          backLink: "← Back to vidlingo",
+          title: "vidlingo — Privacy Policy",
+          updatedLabel: "Last updated:",
+          intro:
+            "vidlingo (the browser extension, published by Fluxora) turns any YouTube video with captions into bilingual sentence flashcards, shown in a side panel next to the video. This page explains what data the extension touches, what it stores, and — importantly — what it never does.",
+          shortVersionHeading: "The short version",
+          shortVersionBody:
+            "Your saved decks/flashcards stay on your own device, in this browser's local storage. vidlingo does not run its own server that receives your videos, captions, or translations, and does not sell or share your data with anyone. The only data that ever leaves your device is what you explicitly send to a translation provider you configure yourself (see below).",
+          readsHeading: "What the extension reads",
+          readsColData: "Data",
+          readsColHappens: "What happens to it",
+          reads1Data: "Caption/transcript text from the YouTube video open in your active tab",
+          reads1Happens:
+            "Read locally to build flashcards. Sent off your device only if you've configured your own LLM translation provider (see below) — a request goes directly from your browser to that provider, never through vidlingo's own servers.",
+          reads2Data: "Your saved library (decks, cards, bookmarks)",
+          reads2Happens: "Stored only in this browser's local storage (",
+          reads2HappensEnd: "). Never transmitted anywhere.",
+          reads3Data: "Downloaded dictionary/tokenizer data (per learning language)",
+          reads3Happens:
+            "Fetched, after your confirmation, from a public GitHub repository hosting static files — no personal data is sent to request these, and nothing downloads without you confirming it first. Stored locally (IndexedDB).",
+          providersHeading: "Translation providers (bring your own key)",
+          providersLead: "Translation is provided by whichever option you choose in Settings:",
+          providersItem1Strong: "Chrome's built-in on-device translator",
+          providersItem1Rest: "— nothing ever leaves your device.",
+          providersItem2Strong: "Any OpenAI-compatible LLM API endpoint",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, a local LM Studio/Ollama server, etc.) — your API key is stored only in this browser's local storage, and requests go directly from your browser to that endpoint.",
+          dontHeading: "What we don't do",
+          dont1: "We don't sell or share your data with third parties.",
+          dont2: "We don't track your browsing history beyond the single active tab's current YouTube URL, read only to know which video is open.",
+          dont3: "We don't show ads or use your data for advertising.",
+          dont4: "We don't use your data to determine creditworthiness or for lending purposes.",
+          permsHeading: "Permissions this extension requests",
+          permsColPermission: "Permission",
+          permsColWhy: "Why",
+          perms1Why: "Saves your library and downloaded dictionaries locally on this device.",
+          perms2Why: "The entire UI is a side panel next to the video, not a popup.",
+          perms3Why: "Required by a sign-in library the extension bundles but does not currently expose any sign-in flow for — unused in this build.",
+          perms4Label: "Host access to",
+          perms4Why: "Reads the transcript already visible on the page you have open, and adds playback controls to it.",
+          perms5Label: "Host access to",
+          perms5Why: "Downloads a language's dictionary/tokenizer data, only after you confirm — these are public, read-only reference files, not personal data.",
+          changesHeading: "Changes to this policy",
+          changesBody:
+            'If this policy changes, the "Last updated" date above will change, and material changes will be reflected in the extension\'s own Chrome Web Store listing.',
+          contactHeading: "Contact",
+          contactLead: "If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at:",
+        },
+        ja: {
+          pageTitle: "vidlingo — プライバシーポリシー",
+          backLink: "← vidlingo に戻る",
+          title: "vidlingo — プライバシーポリシー",
+          updatedLabel: "最終更新日：",
+          intro:
+            "vidlingo（Fluxoraが公開するブラウザ拡張機能）は、字幕付きのあらゆるYouTube動画を、動画の横のサイドパネルに表示されるバイリンガルの文フラッシュカードに変換します。このページでは、拡張機能がどのデータに触れ、何を保存し — そして重要な点として — 何を絶対にしないかを説明します。",
+          shortVersionHeading: "要約",
+          shortVersionBody:
+            "保存したデッキ/フラッシュカードは、あなた自身の端末内、このブラウザのローカルストレージにのみ保存されます。vidlingoは動画・字幕・翻訳を受け取る独自サーバーを運用しておらず、あなたのデータを誰にも販売・共有しません。端末の外に出る唯一のデータは、あなたが自分で設定した翻訳プロバイダーに明示的に送信するものだけです（下記参照）。",
+          readsHeading: "拡張機能が読み取るもの",
+          readsColData: "データ",
+          readsColHappens: "その後の扱い",
+          reads1Data: "アクティブなタブで開いているYouTube動画の字幕/文字起こしテキスト",
+          reads1Happens:
+            "フラッシュカード作成のためローカルで読み取られます。あなた自身が設定したLLM翻訳プロバイダーを使用している場合のみ端末外に送信されます（下記参照）— リクエストはブラウザからそのプロバイダーへ直接送られ、vidlingo自身のサーバーを経由することは一切ありません。",
+          reads2Data: "保存済みのライブラリ（デッキ、カード、ブックマーク）",
+          reads2Happens: "このブラウザのローカルストレージ（",
+          reads2HappensEnd: "）にのみ保存されます。どこにも送信されません。",
+          reads3Data: "ダウンロードした辞書/トークナイザーデータ（学習言語ごと）",
+          reads3Happens:
+            "あなたが確認した後に、静的ファイルを公開しているGitHubの公開リポジトリから取得されます — 取得のために個人データが送信されることはなく、あなたが確認しない限り何もダウンロードされません。ローカル（IndexedDB）に保存されます。",
+          providersHeading: "翻訳プロバイダー（自分の鍵を使う：BYOK）",
+          providersLead: "翻訳は、設定画面で選んだオプションによって提供されます：",
+          providersItem1Strong: "Chrome内蔵のオンデバイス翻訳",
+          providersItem1Rest: "— 端末の外に出ることは一切ありません。",
+          providersItem2Strong: "任意のOpenAI互換LLM APIエンドポイント",
+          providersItem2Rest:
+            "（OpenAI、Groq、OpenRouter、ローカルのLM Studio/Ollamaサーバーなど）— APIキーはこのブラウザのローカルストレージにのみ保存され、リクエストはブラウザからそのエンドポイントへ直接送られます。",
+          dontHeading: "行わないこと",
+          dont1: "データを第三者に販売・共有することはありません。",
+          dont2: "アクティブなタブの現在のYouTube URL（どの動画が開かれているかを知るためだけに読み取ります）以外の閲覧履歴を追跡することはありません。",
+          dont3: "広告を表示したり、データを広告目的で使用したりすることはありません。",
+          dont4: "データを信用力の判定や貸付目的に使用することはありません。",
+          permsHeading: "この拡張機能が要求する権限",
+          permsColPermission: "権限",
+          permsColWhy: "理由",
+          perms1Why: "ライブラリとダウンロードした辞書をこの端末にローカル保存するため。",
+          perms2Why: "UI全体が動画の横のサイドパネルであり、ポップアップではないため。",
+          perms3Why: "拡張機能に同梱されているが現時点ではどのサインインフローも公開していないサインインライブラリに必要 — このビルドでは未使用。",
+          perms4Label: "ホストアクセス先：",
+          perms4Why: "開いているページに既に表示されている字幕を読み取り、再生コントロールを追加するため。",
+          perms5Label: "ホストアクセス先：",
+          perms5Why: "あなたが確認した後にのみ、言語の辞書/トークナイザーデータをダウンロードするため — これらは公開の読み取り専用の参照ファイルであり、個人データではありません。",
+          changesHeading: "本ポリシーの変更について",
+          changesBody:
+            "本ポリシーが変更された場合、上記の「最終更新日」が変更され、重要な変更は拡張機能自身のChromeウェブストアの掲載情報にも反映されます。",
+          contactHeading: "お問い合わせ",
+          contactLead: "本プライバシーポリシーやあなたのデータについてご質問・ご懸念・ご要望がある場合は、以下までご連絡ください：",
+        },
+        zh: {
+          pageTitle: "vidlingo — 隐私政策",
+          backLink: "← 返回 vidlingo",
+          title: "vidlingo — 隐私政策",
+          updatedLabel: "最后更新：",
+          intro:
+            "vidlingo（由 Fluxora 发布的浏览器扩展程序）会把任何带字幕的 YouTube 视频，转换成显示在视频旁侧边面板中的双语句子单词卡。本页说明扩展程序会接触哪些数据、存储哪些数据，以及 — 更重要的是 — 绝不会做哪些事。",
+          shortVersionHeading: "简短版本",
+          shortVersionBody:
+            "你保存的卡组/单词卡只保留在你自己的设备上，存于此浏览器的本地存储。vidlingo 不会架设接收你的视频、字幕或翻译内容的自有服务器，也不会将你的数据出售或分享给任何人。唯一会离开你设备的数据，是你明确发送给自己设置的翻译服务的内容（见下文）。",
+          readsHeading: "扩展程序会读取什么",
+          readsColData: "数据",
+          readsColHappens: "后续处理方式",
+          reads1Data: "当前活动标签页中打开的 YouTube 视频的字幕/文字稿内容",
+          reads1Happens:
+            "在本地读取以生成单词卡。只有在你设置了自己的 LLM 翻译服务时才会传出设备（见下文）— 请求会直接从你的浏览器发送到该服务，绝不会经过 vidlingo 自己的服务器。",
+          reads2Data: "你保存的资料库（卡组、卡片、书签）",
+          reads2Happens: "仅存储于此浏览器的本地存储（",
+          reads2HappensEnd: "）。绝不会发送到任何地方。",
+          reads3Data: "下载的词典/分词器数据（按学习语言）",
+          reads3Happens:
+            "在你确认后，从托管静态文件的公开 GitHub 仓库获取 — 请求这些文件不会发送任何个人数据，且未经你确认绝不会下载任何内容。存储在本地（IndexedDB）。",
+          providersHeading: "翻译服务（自备密钥）",
+          providersLead: "翻译由你在设置中选择的选项提供：",
+          providersItem1Strong: "Chrome 内置的设备端翻译",
+          providersItem1Rest: "— 绝不会离开你的设备。",
+          providersItem2Strong: "任何 OpenAI 兼容的 LLM API 端点",
+          providersItem2Rest:
+            "（OpenAI、Groq、OpenRouter、本地的 LM Studio/Ollama 服务器等）— 你的 API 密钥仅存储于此浏览器的本地存储，请求会直接从你的浏览器发送到该端点。",
+          dontHeading: "我们绝不会做的事",
+          dont1: "我们不会将你的数据出售或分享给第三方。",
+          dont2: "除了读取当前活动标签页的 YouTube 网址（仅用于知道当前打开的是哪个视频）之外，我们不会追踪你的浏览记录。",
+          dont3: "我们不会展示广告，也不会将你的数据用于广告目的。",
+          dont4: "我们不会将你的数据用于信用评估或放贷目的。",
+          permsHeading: "此扩展程序请求的权限",
+          permsColPermission: "权限",
+          permsColWhy: "原因",
+          perms1Why: "将你的资料库和已下载的词典本地保存在此设备上。",
+          perms2Why: "整个界面是视频旁的侧边面板，而非弹出窗口。",
+          perms3Why: "扩展程序内置但目前未提供任何登录流程的登录库所需 — 此版本中未使用。",
+          perms4Label: "主机访问权限：",
+          perms4Why: "读取当前打开页面上已显示的字幕，并为其添加播放控制。",
+          perms5Label: "主机访问权限：",
+          perms5Why: "仅在你确认后才下载某语言的词典/分词器数据 — 这些是公开的只读参考文件，并非个人数据。",
+          changesHeading: "本政策的变更",
+          changesBody: "若本政策有所变更，上方的「最后更新」日期会随之变更，重大变更也会反映在扩展程序自身的 Chrome 网上应用店页面中。",
+          contactHeading: "联系我们",
+          contactLead: "如果你对本隐私政策或你的数据有任何问题、疑虑或请求，请通过以下方式联系我们：",
+        },
+        "zh-Hant": {
+          pageTitle: "vidlingo — 隱私權政策",
+          backLink: "← 返回 vidlingo",
+          title: "vidlingo — 隱私權政策",
+          updatedLabel: "最後更新：",
+          intro:
+            "vidlingo（由 Fluxora 發布的瀏覽器擴充功能）會將任何有字幕的 YouTube 影片，轉換成顯示在影片旁側邊面板中的雙語句子單字卡。本頁說明擴充功能會接觸哪些資料、儲存哪些資料，以及 — 更重要的是 — 絕不會做哪些事。",
+          shortVersionHeading: "簡短版本",
+          shortVersionBody:
+            "你儲存的卡組/單字卡只保留在你自己的裝置上，存於此瀏覽器的本機儲存空間。vidlingo 不會架設接收你的影片、字幕或翻譯內容的自有伺服器，也不會將你的資料出售或分享給任何人。唯一會離開你裝置的資料，是你明確傳送給自己設定的翻譯服務的內容（見下文）。",
+          readsHeading: "擴充功能會讀取什麼",
+          readsColData: "資料",
+          readsColHappens: "後續處理方式",
+          reads1Data: "目前分頁中開啟的 YouTube 影片的字幕/文字稿內容",
+          reads1Happens:
+            "在本機讀取以建立單字卡。只有在你設定了自己的 LLM 翻譯服務時才會傳出裝置（見下文）— 請求會直接從你的瀏覽器傳送到該服務，絕不會經過 vidlingo 自己的伺服器。",
+          reads2Data: "你儲存的資料庫（卡組、卡片、書籤）",
+          reads2Happens: "僅儲存於此瀏覽器的本機儲存空間（",
+          reads2HappensEnd: "）。絕不會傳送到任何地方。",
+          reads3Data: "下載的字典/斷詞資料（依學習語言而定）",
+          reads3Happens:
+            "在你確認後，從公開的 GitHub 儲存庫（存放靜態檔案）取得 — 請求這些檔案不會傳送任何個人資料，且未經你確認絕不會下載任何內容。儲存在本機（IndexedDB）。",
+          providersHeading: "翻譯服務（自備金鑰）",
+          providersLead: "翻譯由你在設定中選擇的選項提供：",
+          providersItem1Strong: "Chrome 內建的裝置端翻譯",
+          providersItem1Rest: "— 絕不會離開你的裝置。",
+          providersItem2Strong: "任何 OpenAI 相容的 LLM API 端點",
+          providersItem2Rest:
+            "（OpenAI、Groq、OpenRouter、本機的 LM Studio/Ollama 伺服器等）— 你的 API 金鑰僅儲存於此瀏覽器的本機儲存空間，請求會直接從你的瀏覽器傳送到該端點。",
+          dontHeading: "我們絕不會做的事",
+          dont1: "我們不會將你的資料出售或分享給第三方。",
+          dont2: "除了讀取目前分頁的 YouTube 網址（僅用於得知目前開啟哪部影片）之外，我們不會追蹤你的瀏覽紀錄。",
+          dont3: "我們不會顯示廣告，也不會將你的資料用於廣告用途。",
+          dont4: "我們不會將你的資料用於信用評估或放貸用途。",
+          permsHeading: "此擴充功能要求的權限",
+          permsColPermission: "權限",
+          permsColWhy: "原因",
+          perms1Why: "將你的資料庫與已下載的字典儲存在此裝置的本機端。",
+          perms2Why: "整個介面是影片旁的側邊面板，而非彈出視窗。",
+          perms3Why: "擴充功能內含的登入函式庫需要此權限，但目前並未提供任何登入流程 — 此版本中未使用。",
+          perms4Label: "主機存取權限：",
+          perms4Why: "讀取你目前開啟頁面上已顯示的字幕，並為其加入播放控制項。",
+          perms5Label: "主機存取權限：",
+          perms5Why: "只有在你確認後才會下載某語言的字典/斷詞資料 — 這些是公開的唯讀參考檔案，並非個人資料。",
+          changesHeading: "本政策的變更",
+          changesBody: "若本政策有所變更，上方的「最後更新」日期會隨之更新，重大變更也會反映在擴充功能自己的 Chrome 線上應用程式商店頁面中。",
+          contactHeading: "聯絡我們",
+          contactLead: "若你對本隱私權政策或你的資料有任何問題、疑慮或請求，請透過以下方式聯絡我們：",
+        },
+        ko: {
+          pageTitle: "vidlingo — 개인정보처리방침",
+          backLink: "← vidlingo로 돌아가기",
+          title: "vidlingo — 개인정보처리방침",
+          updatedLabel: "최종 업데이트:",
+          intro:
+            "vidlingo(Fluxora가 게시한 브라우저 확장 프로그램)는 자막이 있는 모든 YouTube 영상을, 영상 옆 사이드 패널에 표시되는 이중언어 문장 플래시카드로 변환합니다. 이 페이지에서는 확장 프로그램이 다루는 데이터, 저장하는 데이터, 그리고 — 중요하게도 — 절대 하지 않는 일을 설명합니다.",
+          shortVersionHeading: "요약",
+          shortVersionBody:
+            "저장한 덱/플래시카드는 사용자의 기기, 즉 이 브라우저의 로컬 저장소에만 남습니다. vidlingo는 영상, 자막, 번역을 받는 자체 서버를 운영하지 않으며, 사용자의 데이터를 누구에게도 판매하거나 공유하지 않습니다. 기기 밖으로 나가는 유일한 데이터는 사용자가 직접 설정한 번역 제공자에게 명시적으로 보내는 것뿐입니다(아래 참조).",
+          readsHeading: "확장 프로그램이 읽는 항목",
+          readsColData: "데이터",
+          readsColHappens: "처리 방식",
+          reads1Data: "활성 탭에서 열려 있는 YouTube 영상의 자막/스크립트 텍스트",
+          reads1Happens:
+            "플래시카드를 만들기 위해 로컬에서 읽습니다. 사용자가 직접 설정한 LLM 번역 제공자를 사용하는 경우에만 기기 밖으로 전송됩니다(아래 참조) — 요청은 브라우저에서 해당 제공자로 직접 전송되며, vidlingo 자체 서버를 거치는 일은 절대 없습니다.",
+          reads2Data: "저장된 라이브러리(덱, 카드, 북마크)",
+          reads2Happens: "이 브라우저의 로컬 저장소(",
+          reads2HappensEnd: ")에만 저장됩니다. 어디로도 전송되지 않습니다.",
+          reads3Data: "다운로드한 사전/토크나이저 데이터(학습 언어별)",
+          reads3Happens:
+            "사용자가 확인한 후, 정적 파일을 호스팅하는 공개 GitHub 저장소에서 가져옵니다 — 이를 요청하는 데 개인 데이터가 전송되지 않으며, 사용자가 먼저 확인하지 않으면 아무것도 다운로드되지 않습니다. 로컬(IndexedDB)에 저장됩니다.",
+          providersHeading: "번역 제공자(직접 키 사용: BYOK)",
+          providersLead: "번역은 설정에서 선택한 옵션에 따라 제공됩니다:",
+          providersItem1Strong: "Chrome 내장 온디바이스 번역",
+          providersItem1Rest: "— 기기 밖으로 나가는 일이 전혀 없습니다.",
+          providersItem2Strong: "모든 OpenAI 호환 LLM API 엔드포인트",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, 로컬 LM Studio/Ollama 서버 등) — API 키는 이 브라우저의 로컬 저장소에만 저장되며, 요청은 브라우저에서 해당 엔드포인트로 직접 전송됩니다.",
+          dontHeading: "하지 않는 일",
+          dont1: "사용자의 데이터를 제3자에게 판매하거나 공유하지 않습니다.",
+          dont2: "어떤 영상이 열려 있는지 알기 위해서만 읽는 활성 탭의 현재 YouTube URL 외에는 방문 기록을 추적하지 않습니다.",
+          dont3: "광고를 표시하거나 광고 목적으로 데이터를 사용하지 않습니다.",
+          dont4: "신용도 판단이나 대출 목적으로 데이터를 사용하지 않습니다.",
+          permsHeading: "이 확장 프로그램이 요청하는 권한",
+          permsColPermission: "권한",
+          permsColWhy: "이유",
+          perms1Why: "라이브러리와 다운로드한 사전을 이 기기에 로컬로 저장합니다.",
+          perms2Why: "전체 UI가 팝업이 아닌 영상 옆 사이드 패널이기 때문입니다.",
+          perms3Why: "확장 프로그램에 번들된 로그인 라이브러리에 필요하지만 현재 어떤 로그인 흐름도 노출하지 않습니다 — 이 빌드에서는 사용되지 않습니다.",
+          perms4Label: "호스트 액세스 대상:",
+          perms4Why: "열려 있는 페이지에 이미 표시된 자막을 읽고, 재생 컨트롤을 추가합니다.",
+          perms5Label: "호스트 액세스 대상:",
+          perms5Why: "사용자가 확인한 후에만 언어별 사전/토크나이저 데이터를 다운로드합니다 — 이는 공개된 읽기 전용 참조 파일이며 개인 데이터가 아닙니다.",
+          changesHeading: "본 정책의 변경",
+          changesBody: "본 정책이 변경되면 위의 '최종 업데이트' 날짜가 변경되며, 중요한 변경 사항은 확장 프로그램 자체의 Chrome 웹 스토어 등록 정보에도 반영됩니다.",
+          contactHeading: "문의하기",
+          contactLead: "본 개인정보처리방침이나 사용자의 데이터에 관해 질문, 우려, 요청이 있으시면 아래로 연락해 주세요:",
+        },
+        es: {
+          pageTitle: "vidlingo — Política de privacidad",
+          backLink: "← Volver a vidlingo",
+          title: "vidlingo — Política de privacidad",
+          updatedLabel: "Última actualización:",
+          intro:
+            "vidlingo (la extensión de navegador, publicada por Fluxora) convierte cualquier vídeo de YouTube con subtítulos en tarjetas de frases bilingües, mostradas en un panel lateral junto al vídeo. Esta página explica qué datos toca la extensión, qué guarda y — más importante — qué nunca hace.",
+          shortVersionHeading: "La versión resumida",
+          shortVersionBody:
+            "Tus mazos/tarjetas guardados permanecen en tu propio dispositivo, en el almacenamiento local de este navegador. vidlingo no opera un servidor propio que reciba tus vídeos, subtítulos o traducciones, y no vende ni comparte tus datos con nadie. El único dato que sale de tu dispositivo es el que envías explícitamente a un proveedor de traducción que tú mismo configuras (ver más abajo).",
+          readsHeading: "Qué lee la extensión",
+          readsColData: "Dato",
+          readsColHappens: "Qué ocurre con él",
+          reads1Data: "Texto de subtítulos/transcripción del vídeo de YouTube abierto en tu pestaña activa",
+          reads1Happens:
+            "Se lee localmente para crear tarjetas. Solo sale de tu dispositivo si has configurado tu propio proveedor de traducción LLM (ver más abajo) — la solicitud va directamente de tu navegador a ese proveedor, nunca a través de los servidores de vidlingo.",
+          reads2Data: "Tu biblioteca guardada (mazos, tarjetas, marcadores)",
+          reads2Happens: "Se guarda solo en el almacenamiento local de este navegador (",
+          reads2HappensEnd: "). Nunca se transmite a ningún sitio.",
+          reads3Data: "Datos de diccionario/tokenizador descargados (por idioma de aprendizaje)",
+          reads3Happens:
+            "Se obtienen, tras tu confirmación, de un repositorio público de GitHub que aloja archivos estáticos — no se envía ningún dato personal para solicitarlos, y nada se descarga sin que lo confirmes primero. Se guarda localmente (IndexedDB).",
+          providersHeading: "Proveedores de traducción (trae tu propia clave)",
+          providersLead: "La traducción la proporciona la opción que elijas en Configuración:",
+          providersItem1Strong: "El traductor integrado en el dispositivo de Chrome",
+          providersItem1Rest: "— nunca sale de tu dispositivo.",
+          providersItem2Strong: "Cualquier endpoint de API LLM compatible con OpenAI",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, un servidor local LM Studio/Ollama, etc.) — tu clave de API se guarda solo en el almacenamiento local de este navegador, y las solicitudes van directamente de tu navegador a ese endpoint.",
+          dontHeading: "Lo que no hacemos",
+          dont1: "No vendemos ni compartimos tus datos con terceros.",
+          dont2: "No rastreamos tu historial de navegación más allá de la URL actual de YouTube de la única pestaña activa, leída solo para saber qué vídeo está abierto.",
+          dont3: "No mostramos anuncios ni usamos tus datos con fines publicitarios.",
+          dont4: "No usamos tus datos para determinar solvencia crediticia ni con fines de préstamo.",
+          permsHeading: "Permisos que solicita esta extensión",
+          permsColPermission: "Permiso",
+          permsColWhy: "Por qué",
+          perms1Why: "Guarda tu biblioteca y los diccionarios descargados localmente en este dispositivo.",
+          perms2Why: "Toda la interfaz es un panel lateral junto al vídeo, no una ventana emergente.",
+          perms3Why: "Requerido por una librería de inicio de sesión incluida en la extensión pero que actualmente no expone ningún flujo de inicio de sesión — no se usa en esta versión.",
+          perms4Label: "Acceso al host:",
+          perms4Why: "Lee la transcripción ya visible en la página que tienes abierta y le añade controles de reproducción.",
+          perms5Label: "Acceso al host:",
+          perms5Why: "Descarga los datos de diccionario/tokenizador de un idioma, solo tras tu confirmación — son archivos de referencia públicos y de solo lectura, no datos personales.",
+          changesHeading: "Cambios en esta política",
+          changesBody: 'Si esta política cambia, la fecha de "Última actualización" de arriba cambiará, y los cambios importantes se reflejarán también en la ficha de la extensión en Chrome Web Store.',
+          contactHeading: "Contacto",
+          contactLead: "Si tienes alguna pregunta, inquietud o solicitud sobre esta Política de privacidad o tus datos, contáctanos en:",
+        },
+        fr: {
+          pageTitle: "vidlingo — Politique de confidentialité",
+          backLink: "← Retour à vidlingo",
+          title: "vidlingo — Politique de confidentialité",
+          updatedLabel: "Dernière mise à jour :",
+          intro:
+            "vidlingo (l'extension de navigateur, publiée par Fluxora) transforme toute vidéo YouTube sous-titrée en cartes de phrases bilingues, affichées dans un panneau latéral à côté de la vidéo. Cette page explique quelles données l'extension consulte, ce qu'elle conserve et — surtout — ce qu'elle ne fait jamais.",
+          shortVersionHeading: "La version courte",
+          shortVersionBody:
+            "Vos paquets/cartes enregistrés restent sur votre propre appareil, dans le stockage local de ce navigateur. vidlingo n'exploite aucun serveur propre recevant vos vidéos, sous-titres ou traductions, et ne vend ni ne partage vos données avec qui que ce soit. La seule donnée qui quitte jamais votre appareil est celle que vous envoyez explicitement à un fournisseur de traduction que vous configurez vous-même (voir ci-dessous).",
+          readsHeading: "Ce que l'extension lit",
+          readsColData: "Donnée",
+          readsColHappens: "Ce qu'il en advient",
+          reads1Data: "Texte des sous-titres/de la transcription de la vidéo YouTube ouverte dans votre onglet actif",
+          reads1Happens:
+            "Lu localement pour créer les cartes. N'est envoyé hors de votre appareil que si vous avez configuré votre propre fournisseur de traduction LLM (voir ci-dessous) — une requête part directement de votre navigateur vers ce fournisseur, jamais via les serveurs de vidlingo.",
+          reads2Data: "Votre bibliothèque enregistrée (paquets, cartes, favoris)",
+          reads2Happens: "Stockée uniquement dans le stockage local de ce navigateur (",
+          reads2HappensEnd: "). Jamais transmise nulle part.",
+          reads3Data: "Données de dictionnaire/tokeniseur téléchargées (par langue apprise)",
+          reads3Happens:
+            "Récupérées, après votre confirmation, depuis un dépôt GitHub public hébergeant des fichiers statiques — aucune donnée personnelle n'est envoyée pour les demander, et rien n'est téléchargé sans votre confirmation préalable. Stockées localement (IndexedDB).",
+          providersHeading: "Fournisseurs de traduction (apportez votre propre clé)",
+          providersLead: "La traduction est fournie par l'option que vous choisissez dans les Réglages :",
+          providersItem1Strong: "Le traducteur intégré sur l'appareil de Chrome",
+          providersItem1Rest: "— ne quitte jamais votre appareil.",
+          providersItem2Strong: "Tout endpoint d'API LLM compatible OpenAI",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, un serveur local LM Studio/Ollama, etc.) — votre clé API est stockée uniquement dans le stockage local de ce navigateur, et les requêtes partent directement de votre navigateur vers cet endpoint.",
+          dontHeading: "Ce que nous ne faisons pas",
+          dont1: "Nous ne vendons ni ne partageons vos données avec des tiers.",
+          dont2: "Nous ne suivons pas votre historique de navigation au-delà de l'URL YouTube actuelle du seul onglet actif, lue uniquement pour savoir quelle vidéo est ouverte.",
+          dont3: "Nous n'affichons pas de publicités et n'utilisons pas vos données à des fins publicitaires.",
+          dont4: "Nous n'utilisons pas vos données pour évaluer une solvabilité ou à des fins de prêt.",
+          permsHeading: "Autorisations demandées par cette extension",
+          permsColPermission: "Autorisation",
+          permsColWhy: "Pourquoi",
+          perms1Why: "Enregistre votre bibliothèque et les dictionnaires téléchargés localement sur cet appareil.",
+          perms2Why: "Toute l'interface est un panneau latéral à côté de la vidéo, pas une fenêtre pop-up.",
+          perms3Why: "Requis par une bibliothèque de connexion incluse dans l'extension mais qui n'expose actuellement aucun flux de connexion — inutilisée dans cette version.",
+          perms4Label: "Accès à l'hôte :",
+          perms4Why: "Lit la transcription déjà visible sur la page ouverte et lui ajoute des contrôles de lecture.",
+          perms5Label: "Accès à l'hôte :",
+          perms5Why: "Télécharge les données de dictionnaire/tokeniseur d'une langue, uniquement après votre confirmation — ce sont des fichiers de référence publics en lecture seule, pas des données personnelles.",
+          changesHeading: "Modifications de cette politique",
+          changesBody: "Si cette politique change, la date de « Dernière mise à jour » ci-dessus changera, et les changements importants seront reflétés dans la fiche de l'extension sur le Chrome Web Store.",
+          contactHeading: "Contact",
+          contactLead: "Pour toute question, préoccupation ou demande concernant cette politique de confidentialité ou vos données, contactez-nous à :",
+        },
+        de: {
+          pageTitle: "vidlingo — Datenschutzerklärung",
+          backLink: "← Zurück zu vidlingo",
+          title: "vidlingo — Datenschutzerklärung",
+          updatedLabel: "Zuletzt aktualisiert:",
+          intro:
+            "vidlingo (die Browser-Erweiterung, veröffentlicht von Fluxora) verwandelt jedes YouTube-Video mit Untertiteln in zweisprachige Satz-Karteikarten, angezeigt in einer Seitenleiste neben dem Video. Diese Seite erklärt, welche Daten die Erweiterung berührt, was sie speichert und — wichtig — was sie niemals tut.",
+          shortVersionHeading: "Die Kurzfassung",
+          shortVersionBody:
+            "Deine gespeicherten Stapel/Karteikarten bleiben auf deinem eigenen Gerät, im lokalen Speicher dieses Browsers. vidlingo betreibt keinen eigenen Server, der deine Videos, Untertitel oder Übersetzungen empfängt, und verkauft oder teilt deine Daten mit niemandem. Die einzige Information, die dein Gerät jemals verlässt, ist das, was du ausdrücklich an einen selbst konfigurierten Übersetzungsanbieter sendest (siehe unten).",
+          readsHeading: "Was die Erweiterung liest",
+          readsColData: "Daten",
+          readsColHappens: "Was damit geschieht",
+          reads1Data: "Untertitel-/Transkripttext des YouTube-Videos, das in deinem aktiven Tab geöffnet ist",
+          reads1Happens:
+            "Wird lokal gelesen, um Karteikarten zu erstellen. Verlässt dein Gerät nur, wenn du einen eigenen LLM-Übersetzungsanbieter konfiguriert hast (siehe unten) — eine Anfrage geht direkt von deinem Browser an diesen Anbieter, niemals über die Server von vidlingo.",
+          reads2Data: "Deine gespeicherte Bibliothek (Stapel, Karten, Lesezeichen)",
+          reads2Happens: "Wird nur im lokalen Speicher dieses Browsers gespeichert (",
+          reads2HappensEnd: "). Wird niemals irgendwohin übertragen.",
+          reads3Data: "Heruntergeladene Wörterbuch-/Tokenizer-Daten (pro Lernsprache)",
+          reads3Happens:
+            "Wird nach deiner Bestätigung von einem öffentlichen GitHub-Repository mit statischen Dateien abgerufen — es werden keine persönlichen Daten gesendet, um diese anzufordern, und nichts wird heruntergeladen, ohne dass du zuerst bestätigst. Lokal gespeichert (IndexedDB).",
+          providersHeading: "Übersetzungsanbieter (eigenen Schlüssel mitbringen)",
+          providersLead: "Die Übersetzung erfolgt über die Option, die du in den Einstellungen wählst:",
+          providersItem1Strong: "Chromes integrierter On-Device-Übersetzer",
+          providersItem1Rest: "— verlässt dein Gerät niemals.",
+          providersItem2Strong: "Jeder OpenAI-kompatible LLM-API-Endpunkt",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, ein lokaler LM Studio/Ollama-Server usw.) — dein API-Schlüssel wird nur im lokalen Speicher dieses Browsers gespeichert, und Anfragen gehen direkt von deinem Browser an diesen Endpunkt.",
+          dontHeading: "Was wir nicht tun",
+          dont1: "Wir verkaufen oder teilen deine Daten nicht mit Dritten.",
+          dont2: "Wir verfolgen deinen Browserverlauf nicht über die aktuelle YouTube-URL des einen aktiven Tabs hinaus, die nur gelesen wird, um zu wissen, welches Video geöffnet ist.",
+          dont3: "Wir zeigen keine Werbung und verwenden deine Daten nicht für Werbezwecke.",
+          dont4: "Wir verwenden deine Daten nicht zur Bonitätsprüfung oder für Kreditzwecke.",
+          permsHeading: "Berechtigungen, die diese Erweiterung anfordert",
+          permsColPermission: "Berechtigung",
+          permsColWhy: "Warum",
+          perms1Why: "Speichert deine Bibliothek und heruntergeladene Wörterbücher lokal auf diesem Gerät.",
+          perms2Why: "Die gesamte Oberfläche ist eine Seitenleiste neben dem Video, kein Popup.",
+          perms3Why: "Erforderlich für eine in der Erweiterung gebündelte Anmeldebibliothek, für die derzeit kein Anmeldeablauf angeboten wird — in diesem Build ungenutzt.",
+          perms4Label: "Host-Zugriff auf:",
+          perms4Why: "Liest das auf der geöffneten Seite bereits sichtbare Transkript und fügt ihm Wiedergabesteuerungen hinzu.",
+          perms5Label: "Host-Zugriff auf:",
+          perms5Why: "Lädt die Wörterbuch-/Tokenizer-Daten einer Sprache herunter, erst nach deiner Bestätigung — dies sind öffentliche, schreibgeschützte Referenzdateien, keine persönlichen Daten.",
+          changesHeading: "Änderungen dieser Richtlinie",
+          changesBody: "Falls sich diese Richtlinie ändert, ändert sich das obige Datum „Zuletzt aktualisiert“, und wesentliche Änderungen werden auch im eigenen Chrome-Web-Store-Eintrag der Erweiterung widergespiegelt.",
+          contactHeading: "Kontakt",
+          contactLead: "Bei Fragen, Bedenken oder Anliegen zu dieser Datenschutzerklärung oder deinen Daten kontaktiere uns bitte unter:",
+        },
+        pt: {
+          pageTitle: "vidlingo — Política de Privacidade",
+          backLink: "← Voltar ao vidlingo",
+          title: "vidlingo — Política de Privacidade",
+          updatedLabel: "Última atualização:",
+          intro:
+            "O vidlingo (a extensão de navegador, publicada pela Fluxora) transforma qualquer vídeo do YouTube com legendas em cartões de frases bilíngues, exibidos num painel lateral ao lado do vídeo. Esta página explica quais dados a extensão acessa, o que ela armazena e — o mais importante — o que ela nunca faz.",
+          shortVersionHeading: "A versão resumida",
+          shortVersionBody:
+            "Seus baralhos/cartões salvos permanecem no seu próprio dispositivo, no armazenamento local deste navegador. O vidlingo não opera um servidor próprio que receba seus vídeos, legendas ou traduções, e não vende nem compartilha seus dados com ninguém. O único dado que sai do seu dispositivo é aquele que você envia explicitamente a um provedor de tradução configurado por você mesmo (veja abaixo).",
+          readsHeading: "O que a extensão lê",
+          readsColData: "Dado",
+          readsColHappens: "O que acontece com ele",
+          reads1Data: "Texto de legendas/transcrição do vídeo do YouTube aberto na sua aba ativa",
+          reads1Happens:
+            "Lido localmente para criar os cartões. Só sai do seu dispositivo se você tiver configurado seu próprio provedor de tradução LLM (veja abaixo) — a solicitação vai diretamente do seu navegador para esse provedor, nunca pelos servidores do vidlingo.",
+          reads2Data: "Sua biblioteca salva (baralhos, cartões, marcadores)",
+          reads2Happens: "Armazenada apenas no armazenamento local deste navegador (",
+          reads2HappensEnd: "). Nunca transmitida a lugar nenhum.",
+          reads3Data: "Dados de dicionário/tokenizador baixados (por idioma de aprendizado)",
+          reads3Happens:
+            "Obtidos, após sua confirmação, de um repositório público do GitHub que hospeda arquivos estáticos — nenhum dado pessoal é enviado para solicitá-los, e nada é baixado sem que você confirme primeiro. Armazenados localmente (IndexedDB).",
+          providersHeading: "Provedores de tradução (traga sua própria chave)",
+          providersLead: "A tradução é fornecida pela opção que você escolher nas Configurações:",
+          providersItem1Strong: "O tradutor integrado no dispositivo do Chrome",
+          providersItem1Rest: "— nunca sai do seu dispositivo.",
+          providersItem2Strong: "Qualquer endpoint de API LLM compatível com OpenAI",
+          providersItem2Rest:
+            "(OpenAI, Groq, OpenRouter, um servidor local LM Studio/Ollama, etc.) — sua chave de API é armazenada apenas no armazenamento local deste navegador, e as solicitações vão diretamente do seu navegador para esse endpoint.",
+          dontHeading: "O que não fazemos",
+          dont1: "Não vendemos nem compartilhamos seus dados com terceiros.",
+          dont2: "Não rastreamos seu histórico de navegação além da URL atual do YouTube da única aba ativa, lida apenas para saber qual vídeo está aberto.",
+          dont3: "Não exibimos anúncios nem usamos seus dados para fins publicitários.",
+          dont4: "Não usamos seus dados para determinar capacidade de crédito ou para fins de empréstimo.",
+          permsHeading: "Permissões que esta extensão solicita",
+          permsColPermission: "Permissão",
+          permsColWhy: "Por quê",
+          perms1Why: "Salva sua biblioteca e os dicionários baixados localmente neste dispositivo.",
+          perms2Why: "Toda a interface é um painel lateral ao lado do vídeo, não um pop-up.",
+          perms3Why: "Exigido por uma biblioteca de login incluída na extensão, mas que atualmente não expõe nenhum fluxo de login — não utilizada nesta versão.",
+          perms4Label: "Acesso ao host:",
+          perms4Why: "Lê a transcrição já visível na página aberta e adiciona controles de reprodução a ela.",
+          perms5Label: "Acesso ao host:",
+          perms5Why: "Baixa os dados de dicionário/tokenizador de um idioma, somente após sua confirmação — são arquivos de referência públicos e somente leitura, não dados pessoais.",
+          changesHeading: "Alterações nesta política",
+          changesBody: 'Se esta política mudar, a data de "Última atualização" acima mudará, e alterações materiais serão refletidas na própria página da extensão na Chrome Web Store.',
+          contactHeading: "Contato",
+          contactLead: "Se você tiver alguma dúvida, preocupação ou solicitação sobre esta Política de Privacidade ou seus dados, entre em contato conosco em:",
+        },
+      };
+
+      (function () {
+        var params = new URLSearchParams(location.search);
+        var requested = params.get("lang");
+        var lang = STRINGS[requested] ? requested : "en";
+        var t = STRINGS[lang];
+
+        document.documentElement.lang = lang;
+        document.title = t.pageTitle;
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (t[key]) el.textContent = t[key];
+        });
+
+        var select = document.getElementById("lang-switcher");
+        LANGS.forEach(function (entry) {
+          var option = document.createElement("option");
+          option.value = entry.code;
+          option.textContent = entry.label;
+          if (entry.code === lang) option.selected = true;
+          select.appendChild(option);
+        });
+        select.addEventListener("change", function () {
+          var next = new URLSearchParams(location.search);
+          if (select.value === "en") next.delete("lang");
+          else next.set("lang", select.value);
+          var query = next.toString();
+          location.search = query ? "?" + query : "";
+        });
+      })();
+    </script>
   </body>
 </html>

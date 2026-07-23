@@ -3,79 +3,181 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fluxora</title>
+    <title>Fluxora — An independent studio building small, focused tools</title>
+    <!-- Same teal "flow" mark as this page's own header below — kept as a
+         self-contained data URI (not a separate file) so there's nothing
+         extra for `just publishSite` to copy across. -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230f766e'/%3E%3Cpath d='M4 6c3 0 3 4 6 4s3-4 6-4 3 4 6 4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M4 12c3 0 3 4 6 4s3-4 6-4 3 4 6 4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
     <style>
       :root {
         color-scheme: light dark;
+        /* Same token names/shape as vidlingo-homepage.html's own system —
+           different values (a slate/teal "flow" hue instead of vidlingo's
+           indigo) so this page reads as the studio's own identity, not a
+           re-skinned copy of one project's page. */
+        --ink: #18181b;
+        --muted: #52525b;
+        --faint: #71717a;
+        --canvas: #fafafa;
+        --surface: #ffffff;
+        --border: #e4e4e7;
+        --accent: #0f766e;
+        --accent-soft: #ecfdf9;
+      }
+      * {
+        box-sizing: border-box;
       }
       body {
         max-width: 640px;
-        margin: 80px auto;
-        padding: 0 24px;
+        margin: 0 auto;
+        padding: 72px 24px 96px;
         font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
         line-height: 1.6;
-        color: #18181b;
-        background: #fafafa;
+        color: var(--ink);
+        background: var(--canvas);
       }
-      @media (prefers-color-scheme: dark) {
-        body {
-          color: #e4e4e7;
-          background: #0a0a0f;
-        }
-        a {
-          color: #a78bfa;
-        }
-        .card {
-          background: #141419;
-          border-color: #27272a;
-        }
+      a {
+        color: var(--accent);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+      /* A simple three-thread "flow" mark — three lines converging into one,
+         the plainest visual metaphor for "Fluxora" (flux/flow) that doesn't
+         borrow vidlingo's own translation-arrows glyph. Signature element
+         for this specific page, kept to exactly one place. */
+      .brand-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--accent);
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .brand-mark svg {
+        width: 19px;
+        height: 19px;
       }
       h1 {
-        font-size: 28px;
-        margin-bottom: 4px;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin: 0;
       }
       .tagline {
-        color: #71717a;
-        font-size: 15px;
-        margin-bottom: 28px;
+        color: var(--muted);
+        font-size: 15.5px;
+        max-width: 42ch;
+        margin: 20px 0 0;
       }
       h2 {
-        font-size: 16px;
+        font-size: 13px;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.03em;
-        color: #71717a;
-        margin-top: 32px;
-        margin-bottom: 8px;
+        letter-spacing: 0.05em;
+        color: var(--faint);
+        margin: 48px 0 12px;
       }
       .card {
-        background: #ffffff;
-        border: 1px solid #e4e4e7;
-        border-radius: 12px;
-        padding: 16px 20px;
-        margin: 8px 0;
+        display: flex;
+        gap: 14px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 20px;
       }
-      .card a {
+      .card-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .card-mark svg {
+        width: 17px;
+        height: 17px;
+      }
+      .card-body a {
         font-weight: 600;
         text-decoration: none;
+        font-size: 15.5px;
       }
-      .card p {
+      .card-body a:hover {
+        text-decoration: underline;
+      }
+      .card-body p {
         margin: 4px 0 0;
         font-size: 14px;
-        color: #71717a;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        font-size: 14px;
+        color: var(--muted);
+      }
+      footer a {
+        color: inherit;
+        font-weight: 600;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e4e4e7;
+          --muted: #a1a1aa;
+          --faint: #71717a;
+          --canvas: #0a0a0f;
+          --surface: #141419;
+          --border: #27272a;
+          --accent: #2dd4bf;
+          --accent-soft: rgba(45, 212, 191, 0.12);
+        }
+        .brand-mark {
+          color: #062a26;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>Fluxora</h1>
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 6c3 0 3 4 6 4s3-4 6-4 3 4 6 4" />
+          <path d="M4 12c3 0 3 4 6 4s3-4 6-4 3 4 6 4" />
+        </svg>
+      </span>
+      <h1>Fluxora</h1>
+    </div>
     <p class="tagline">An independent studio building small, focused tools.</p>
 
     <h2>Projects</h2>
     <div class="card">
-      <a href="/vidlingo/">vidlingo</a>
-      <p>Bilingual subtitles + flashcards for any YouTube video, in a browser side panel.</p>
+      <span class="card-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" />
+        </svg>
+      </span>
+      <div class="card-body">
+        <a href="/vidlingo/">vidlingo</a>
+        <p>Bilingual subtitles + flashcards for any YouTube video, in a browser side panel.</p>
+      </div>
     </div>
 
-    <h2>Contact</h2>
-    <p><a href="mailto:support@usefluxora.com">support@usefluxora.com</a></p>
+    <footer>
+      Questions or feedback: <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
+    </footer>
   </body>
 </html>

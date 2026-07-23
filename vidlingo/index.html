@@ -6,7 +6,15 @@
     <title>vidlingo — Bilingual subtitle flashcards for YouTube</title>
     <meta
       name="description"
-      content="Turn any YouTube video into bilingual subtitle flashcards, right in a side panel next to the video. Bring your own translation provider — nothing relayed through vidlingo's own servers."
+      content="Turn any captioned YouTube video into bilingual subtitle flashcards, right in a side panel next to the video. Bring your own translation provider — nothing relayed through vidlingo's own servers."
+    />
+    <!-- Same indigo logo mark as this page's own header below — kept as a
+         self-contained data URI (not a separate file) so there's nothing
+         extra for `just publishSite` to copy across. -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%234f46e5'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 6 6'/%3E%3Cpath d='m4 14 6-6 2-3'/%3E%3Cpath d='M2 5h12'/%3E%3Cpath d='M7 2h1'/%3E%3Cpath d='m22 22-5-10-5 10'/%3E%3Cpath d='M14 18h6'/%3E%3C/g%3E%3C/svg%3E"
     />
     <style>
       :root {
@@ -69,6 +77,10 @@
         align-items: center;
         justify-content: space-between;
       }
+      nav {
+        display: flex;
+        align-items: center;
+      }
       nav a {
         color: var(--muted);
         text-decoration: none;
@@ -78,6 +90,21 @@
       }
       nav a:hover {
         color: var(--ink);
+      }
+      /* Plain native <select> rather than a custom dropdown — this page has
+         no other interactive widget, so there's nothing to visually match;
+         a native control is free accessibility/keyboard support this one
+         low-stakes choice doesn't need to re-earn. */
+      #lang-switcher {
+        margin-left: 20px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
       }
 
       /* Hero */
@@ -387,123 +414,128 @@
         <span class="logo-word">vid<b>lingo</b></span>
       </div>
       <nav>
-        <a href="#how">How it works</a>
-        <a href="#support">Support</a>
+        <a href="#how" data-i18n="navHow">How it works</a>
+        <a href="#support" data-i18n="navSupport">Support</a>
+        <!-- Reloads with `?lang=` set, preserving the pathname — the same
+             query param the extension itself sends support.html (see
+             settings-panel.tsx's getDonateUrl), just user-driven here since
+             nothing else links to this page with one already attached. -->
+        <select id="lang-switcher" aria-label="Language"></select>
       </nav>
     </header>
 
     <div class="hero">
       <div>
-        <span class="badge"><span class="dot"></span> Coming soon to the Chrome Web Store</span>
-        <h1 style="margin-top: 16px">Turn any YouTube video into bilingual flashcards</h1>
-        <p class="tagline">
+        <span class="badge"><span class="dot"></span> <span data-i18n="badge">Coming soon to the Chrome Web Store</span></span>
+        <h1 style="margin-top: 16px" data-i18n="heroTitle">Turn any captioned YouTube video into bilingual flashcards</h1>
+        <p class="tagline" data-i18n="heroTagline">
           Right in a side panel next to the video — every caption line becomes a
           card you can translate, tap word-by-word, bookmark, and replay at any speed.
         </p>
       </div>
       <div class="hero-shot">
         <div class="frame">
-          <img src="img/deck-cards.png" alt="vidlingo's side panel showing a deck of bilingual sentence flashcards next to a YouTube video" />
+          <img src="img/deck-cards.png" data-i18n-alt="heroImgAlt" alt="vidlingo's side panel showing a deck of bilingual sentence flashcards next to a YouTube video" />
         </div>
       </div>
     </div>
 
     <section id="how" class="reveal">
-      <h2>How it works</h2>
-      <p class="section-lead">No account, no upload — the whole flow happens in your own browser.</p>
+      <h2 data-i18n="howHeading">How it works</h2>
+      <p class="section-lead" data-i18n="howLead">No account, no upload — the whole flow happens in your own browser.</p>
       <div class="steps">
         <div class="step">
           <span class="num">1</span>
-          <h3>Open a video with captions</h3>
-          <p>Any YouTube video that has captions — auto-generated or manual, in any language.</p>
+          <h3 data-i18n="step1Title">Open a video with captions</h3>
+          <p data-i18n="step1Body">Any YouTube video that has captions — auto-generated or manual, in any language.</p>
         </div>
         <div class="step">
           <span class="num">2</span>
-          <h3>Click "Add to library"</h3>
-          <p>vidlingo reads the transcript and translates it using a provider you control.</p>
+          <h3 data-i18n="step2Title">Click "Add to library"</h3>
+          <p data-i18n="step2Body">vidlingo reads the transcript and translates it using a provider you control.</p>
         </div>
         <div class="step">
           <span class="num">3</span>
-          <h3>Review the deck</h3>
-          <p>Tap any word for its definition, bookmark what you want to revisit, replay slower.</p>
+          <h3 data-i18n="step3Title">Review the deck</h3>
+          <p data-i18n="step3Body">Tap any word for its definition, bookmark what you want to revisit, replay slower.</p>
         </div>
       </div>
     </section>
 
     <section class="reveal">
-      <h2>Built for actually learning, not just translating</h2>
-      <p class="section-lead">Six languages with real dictionaries, your choice of translation provider, and nothing kept on a server you don't control.</p>
+      <h2 data-i18n="featuresHeading">Built for actually learning, not just translating</h2>
+      <p class="section-lead" data-i18n="featuresLead">Six languages with real dictionaries, your choice of translation provider, and nothing kept on a server you don't control.</p>
       <div class="features">
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
           </span>
-          <h3>Six languages, real dictionaries</h3>
-          <p>Japanese, Chinese, Korean, Spanish, French, and German — dictionary-backed word lookup, downloaded on demand.</p>
+          <h3 data-i18n="feature1Title">Six languages, real dictionaries</h3>
+          <p data-i18n="feature1Body">Japanese, Chinese, Korean, Spanish, French, and German — dictionary-backed word lookup, downloaded on demand.</p>
         </div>
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
           </span>
-          <h3>Bring your own translation provider</h3>
-          <p>Chrome's on-device translator (free, no key) or any OpenAI-compatible LLM endpoint you configure.</p>
+          <h3 data-i18n="feature2Title">Bring your own translation provider</h3>
+          <p data-i18n="feature2Body">Chrome's on-device translator (free, no key) or any OpenAI-compatible LLM endpoint you configure.</p>
         </div>
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg>
           </span>
-          <h3>Bookmark words &amp; sentences</h3>
-          <p>Save anything you want to revisit, export/import your bookmarks as a plain JSON file.</p>
+          <h3 data-i18n="feature3Title">Bookmark words &amp; sentences</h3>
+          <p data-i18n="feature3Body">Save anything you want to revisit, export/import your bookmarks as a plain JSON file.</p>
         </div>
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg>
           </span>
-          <h3>Replay at any speed</h3>
-          <p>Slow down a tricky sentence, or let a whole deck autoplay while you follow along.</p>
+          <h3 data-i18n="feature4Title">Replay at any speed</h3>
+          <p data-i18n="feature4Body">Slow down a tricky sentence, or let a whole deck autoplay while you follow along.</p>
         </div>
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
           </span>
-          <h3>100% local by default</h3>
-          <p>Your library lives in this browser only. No vidlingo server ever sees your videos or captions.</p>
+          <h3 data-i18n="feature5Title">100% local by default</h3>
+          <p data-i18n="feature5Body">Your library lives in this browser only. No vidlingo server ever sees your videos or captions.</p>
         </div>
         <div class="feature">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="5" rx="2" ry="2" /><path d="M7 15h4M15 15h2M7 11h2M13 11h4" /></svg>
           </span>
-          <h3>Works with real captions</h3>
-          <p>Auto-generated or manual — vidlingo reads whatever transcript the video already has.</p>
+          <h3 data-i18n="feature6Title">Works with real captions</h3>
+          <p data-i18n="feature6Body">Auto-generated or manual — vidlingo reads whatever transcript the video already has.</p>
         </div>
       </div>
     </section>
 
     <section class="reveal">
-      <h2>See it in action</h2>
+      <h2 data-i18n="actionHeading">See it in action</h2>
       <div class="shots">
         <figure>
           <div class="frame">
-            <img src="img/home-library.png" alt="vidlingo's library view with a saved deck" />
+            <img src="img/home-library.png" data-i18n-alt="shot1Alt" alt="vidlingo's library view with a saved deck" />
           </div>
-          <figcaption>Your library, right where you're watching</figcaption>
+          <figcaption data-i18n="shot1Caption">Your library, right where you're watching</figcaption>
         </figure>
         <figure>
           <div class="frame">
-            <img src="img/settings.png" alt="vidlingo's settings panel showing translation source priority" />
+            <img src="img/settings.png" data-i18n-alt="shot2Alt" alt="vidlingo's settings panel showing translation source priority" />
           </div>
-          <figcaption>Reorder translation sources like a priority list</figcaption>
+          <figcaption data-i18n="shot2Caption">Reorder translation sources like a priority list</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="reveal">
       <div class="card" id="support">
-        <h2 style="margin-top: 0">Support</h2>
+        <h2 style="margin-top: 0" data-i18n="supportHeading">Support</h2>
         <p>
-          Questions, bug reports, or feedback: <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
+          <span data-i18n="supportContactLead">Questions, bug reports, or feedback:</span> <a href="mailto:support@usefluxora.com">support@usefluxora.com</a>
         </p>
-        <p class="support-lead">
+        <p class="support-lead" data-i18n="supportLead">
           vidlingo is free and BYOK by design — no ads, no relaying your data through
           vidlingo's own servers. If it's saved you time, a one-time coffee helps keep
           it maintained.
@@ -512,7 +544,11 @@
              (support.html/support-zh.html) rather than embedding a widget or
              linking straight to ko-fi.com/ifdian.net here — same two pages
              the extension's own Settings "Support this project" link opens,
-             so there's exactly one place either flow leads to per platform. -->
+             so there's exactly one place either flow leads to per platform.
+             Button labels are deliberately NOT translated (see the i18n
+             script's own comment) — "Ko-fi"/"爱发电" are the actual platform
+             names, and each destination page localizes its own heading via
+             this same `?lang=` param regardless of what the button here says. -->
         <div class="support-buttons">
           <a class="btn btn-kofi" href="support.html">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -531,9 +567,472 @@
     </section>
 
     <footer>
-      <a href="/vidlingo/privacy.html">Privacy Policy</a>
+      <a href="/vidlingo/privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
     </footer>
 
+    <script>
+      // Same `?lang=` convention as support.html/support-zh.html (see their
+      // own comments) — mirrors the extension's UiLanguage codes
+      // (settings.ts) so a shared link built from the extension's own
+      // language just works. Unlike the support pages, nothing currently
+      // sends a visitor here with `?lang=` already set (the extension only
+      // links to support.html/support-zh.html directly), so this page also
+      // needs its own switcher — see `#lang-switcher` above — for a real
+      // visitor to ever reach a non-English render at all.
+      var LANGS = [
+        { code: "en", label: "English" },
+        { code: "ja", label: "日本語" },
+        { code: "zh", label: "中文（简体）" },
+        { code: "zh-Hant", label: "中文（繁體）" },
+        { code: "ko", label: "한국어" },
+        { code: "es", label: "Español" },
+        { code: "fr", label: "Français" },
+        { code: "de", label: "Deutsch" },
+        { code: "pt", label: "Português" },
+      ];
+
+      var STRINGS = {
+        en: {
+          pageTitle: "vidlingo — Bilingual subtitle flashcards for YouTube",
+          pageDescription:
+            "Turn any captioned YouTube video into bilingual subtitle flashcards, right in a side panel next to the video. Bring your own translation provider — nothing relayed through vidlingo's own servers.",
+          navHow: "How it works",
+          navSupport: "Support",
+          badge: "Coming soon to the Chrome Web Store",
+          heroTitle: "Turn any captioned YouTube video into bilingual flashcards",
+          heroTagline:
+            "Right in a side panel next to the video — every caption line becomes a card you can translate, tap word-by-word, bookmark, and replay at any speed.",
+          heroImgAlt: "vidlingo's side panel showing a deck of bilingual sentence flashcards next to a YouTube video",
+          howHeading: "How it works",
+          howLead: "No account, no upload — the whole flow happens in your own browser.",
+          step1Title: "Open a video with captions",
+          step1Body: "Any YouTube video that has captions — auto-generated or manual, in any language.",
+          step2Title: 'Click "Add to library"',
+          step2Body: "vidlingo reads the transcript and translates it using a provider you control.",
+          step3Title: "Review the deck",
+          step3Body: "Tap any word for its definition, bookmark what you want to revisit, replay slower.",
+          featuresHeading: "Built for actually learning, not just translating",
+          featuresLead:
+            "Six languages with real dictionaries, your choice of translation provider, and nothing kept on a server you don't control.",
+          feature1Title: "Six languages, real dictionaries",
+          feature1Body: "Japanese, Chinese, Korean, Spanish, French, and German — dictionary-backed word lookup, downloaded on demand.",
+          feature2Title: "Bring your own translation provider",
+          feature2Body: "Chrome's on-device translator (free, no key) or any OpenAI-compatible LLM endpoint you configure.",
+          feature3Title: "Bookmark words & sentences",
+          feature3Body: "Save anything you want to revisit, export/import your bookmarks as a plain JSON file.",
+          feature4Title: "Replay at any speed",
+          feature4Body: "Slow down a tricky sentence, or let a whole deck autoplay while you follow along.",
+          feature5Title: "100% local by default",
+          feature5Body: "Your library lives in this browser only. No vidlingo server ever sees your videos or captions.",
+          feature6Title: "Works with real captions",
+          feature6Body: "Auto-generated or manual — vidlingo reads whatever transcript the video already has.",
+          actionHeading: "See it in action",
+          shot1Alt: "vidlingo's library view with a saved deck",
+          shot1Caption: "Your library, right where you're watching",
+          shot2Alt: "vidlingo's settings panel showing translation source priority",
+          shot2Caption: "Reorder translation sources like a priority list",
+          supportHeading: "Support",
+          supportContactLead: "Questions, bug reports, or feedback:",
+          supportLead:
+            "vidlingo is free and BYOK by design — no ads, no relaying your data through vidlingo's own servers. If it's saved you time, a one-time coffee helps keep it maintained.",
+          footerPrivacy: "Privacy Policy",
+        },
+        ja: {
+          pageTitle: "vidlingo — YouTube用バイリンガル字幕フラッシュカード",
+          pageDescription:
+            "動画の横のサイドパネルで、字幕付きのあらゆるYouTube動画をバイリンガルの字幕フラッシュカードに変換します。翻訳プロバイダーは自分で用意 — vidlingo自身のサーバーには一切中継されません。",
+          navHow: "使い方",
+          navSupport: "応援する",
+          badge: "近日Chromeウェブストアに登場",
+          heroTitle: "字幕付きのYouTube動画をバイリンガルフラッシュカードに",
+          heroTagline:
+            "動画の横のサイドパネルで — 字幕の1行1行がカードになり、翻訳・単語タップ・ブックマーク・好きな速度での再生ができます。",
+          heroImgAlt: "YouTube動画の横でバイリンガルの文フラッシュカードのデッキを表示するvidlingoのサイドパネル",
+          howHeading: "使い方",
+          howLead: "アカウント登録もアップロードも不要 — すべてあなたのブラウザ内で完結します。",
+          step1Title: "字幕付きの動画を開く",
+          step1Body: "字幕（自動生成・手動どちらでも、どの言語でも）があるYouTube動画なら何でも。",
+          step2Title: "「ライブラリに追加」をクリック",
+          step2Body: "vidlingoが字幕を読み取り、あなたが指定したプロバイダーで翻訳します。",
+          step3Title: "デッキを確認",
+          step3Body: "単語をタップして意味を確認、見返したい部分をブックマーク、ゆっくり再生も可能。",
+          featuresHeading: "単なる翻訳ではなく、本当に学べるように",
+          featuresLead: "実用的な辞書を備えた6言語、選べる翻訳プロバイダー、自分の管理下にないサーバーには何も残しません。",
+          feature1Title: "6言語、本格的な辞書",
+          feature1Body: "日本語・中国語・韓国語・スペイン語・フランス語・ドイツ語 — 辞書に基づく単語検索を、必要な時にダウンロード。",
+          feature2Title: "翻訳プロバイダーは自分で選択",
+          feature2Body: "Chrome内蔵のオンデバイス翻訳（無料・キー不要）か、設定した任意のOpenAI互換LLMエンドポイント。",
+          feature3Title: "単語・文をブックマーク",
+          feature3Body: "見返したいものを保存、ブックマークは単純なJSONファイルとしてエクスポート/インポート可能。",
+          feature4Title: "好きな速度で再生",
+          feature4Body: "難しい文はゆっくり再生、デッキ全体を自動再生しながらついていくことも。",
+          feature5Title: "デフォルトで完全ローカル",
+          feature5Body: "ライブラリはこのブラウザ内にのみ保存されます。vidlingoのサーバーが動画や字幕を見ることは一切ありません。",
+          feature6Title: "実際の字幕に対応",
+          feature6Body: "自動生成でも手動でも — vidlingoは動画が既に持つ字幕をそのまま読み取ります。",
+          actionHeading: "実際の画面",
+          shot1Alt: "保存済みデッキを表示するvidlingoのライブラリ画面",
+          shot1Caption: "視聴しているその場に、あなたのライブラリ",
+          shot2Alt: "翻訳ソースの優先順位を表示するvidlingoの設定パネル",
+          shot2Caption: "翻訳ソースを優先順位リストとして並べ替え",
+          supportHeading: "応援する",
+          supportContactLead: "質問・不具合報告・ご意見はこちらへ：",
+          supportLead:
+            "vidlingoは無料・BYOK（自分の鍵を使う）設計です — 広告なし、データをvidlingo自身のサーバーに中継することもありません。時間の節約になったなら、一杯のコーヒー分の支援が開発維持の助けになります。",
+          footerPrivacy: "プライバシーポリシー",
+        },
+        zh: {
+          pageTitle: "vidlingo — YouTube 双语字幕单词卡",
+          pageDescription:
+            "在视频旁的侧边面板中，把任何带字幕的 YouTube 视频变成双语字幕单词卡。自备翻译服务 — 完全不经过 vidlingo 自己的服务器。",
+          navHow: "使用方法",
+          navSupport: "支持",
+          badge: "即将登陆 Chrome 网上应用店",
+          heroTitle: "把任何带字幕的 YouTube 视频变成双语单词卡",
+          heroTagline: "就在视频旁的侧边面板中 — 每一句字幕都会变成一张卡片，可翻译、逐字点按、加入书签、任意调整速度重播。",
+          heroImgAlt: "vidlingo 的侧边面板，在 YouTube 视频旁显示一组双语句子单词卡",
+          howHeading: "使用方法",
+          howLead: "不需账号、不需上传 — 一切都在你自己的浏览器里完成。",
+          step1Title: "打开一个有字幕的视频",
+          step1Body: "任何有字幕（自动生成或手动制作，任何语言均可）的 YouTube 视频。",
+          step2Title: '点击"添加到资料库"',
+          step2Body: "vidlingo 会读取字幕，并用你指定的服务进行翻译。",
+          step3Title: "查看卡组",
+          step3Body: "点按任何单词查看释义，把想复习的内容加入书签，或放慢速度重播。",
+          featuresHeading: "为真正的学习而生，不只是翻译",
+          featuresLead: "六种语言配备真正的词典、可自选翻译服务，任何你无法掌控的服务器都不会留下数据。",
+          feature1Title: "六种语言，真正的词典",
+          feature1Body: "日语、中文、韩语、西班牙语、法语、德语 — 基于词典的单词查询，按需下载。",
+          feature2Title: "自备翻译服务",
+          feature2Body: "Chrome 内置的设备端翻译（免费、无需密钥），或任何你配置的 OpenAI 兼容 LLM 端点。",
+          feature3Title: "收藏单词与句子",
+          feature3Body: "保存任何想复习的内容，书签可导出/导入为纯 JSON 文件。",
+          feature4Title: "任意调整重播速度",
+          feature4Body: "放慢难句的速度，或让整组卡片自动连续播放、边听边跟。",
+          feature5Title: "默认完全本地运行",
+          feature5Body: "你的资料库只存在这个浏览器里。vidlingo 的服务器不会看到你的视频或字幕。",
+          feature6Title: "支持真实字幕",
+          feature6Body: "自动生成或手动制作均可 — vidlingo 会直接读取视频本身已有的字幕。",
+          actionHeading: "实际画面",
+          shot1Alt: "显示已保存卡组的 vidlingo 资料库画面",
+          shot1Caption: "你的资料库，就在你观看的地方",
+          shot2Alt: "显示翻译来源优先级的 vidlingo 设置面板",
+          shot2Caption: "把翻译来源排列成优先级列表",
+          supportHeading: "支持",
+          supportContactLead: "问题、错误反馈或意见：",
+          supportLead:
+            "vidlingo 免费、采用 BYOK（自备密钥）设计 — 没有广告，也不会把你的数据转发到 vidlingo 自己的服务器。如果它帮你省下了时间，一杯咖啡的支持有助于维护这个项目。",
+          footerPrivacy: "隐私政策",
+        },
+        "zh-Hant": {
+          pageTitle: "vidlingo — YouTube 雙語字幕單字卡",
+          pageDescription:
+            "在影片旁的側邊面板中，將任何有字幕的 YouTube 影片變成雙語字幕單字卡。自備翻譯服務 — 完全不經過 vidlingo 自己的伺服器。",
+          navHow: "運作方式",
+          navSupport: "贊助支持",
+          badge: "即將登陸 Chrome 線上應用程式商店",
+          heroTitle: "把任何有字幕的 YouTube 影片變成雙語單字卡",
+          heroTagline: "就在影片旁的側邊面板中 — 每一句字幕都會變成一張卡片，可翻譯、逐字點按、加入書籤、任意調整速度重播。",
+          heroImgAlt: "vidlingo 的側邊面板，在 YouTube 影片旁顯示一組雙語句子單字卡",
+          howHeading: "運作方式",
+          howLead: "不需帳號、不需上傳 — 一切都在你自己的瀏覽器裡完成。",
+          step1Title: "打開一部有字幕的影片",
+          step1Body: "任何有字幕（自動產生或手動製作，任何語言皆可）的 YouTube 影片。",
+          step2Title: "點擊「加入資料庫」",
+          step2Body: "vidlingo 會讀取字幕，並用你指定的服務進行翻譯。",
+          step3Title: "檢視卡組",
+          step3Body: "點按任何單字查看釋義，將想複習的內容加入書籤，或放慢速度重播。",
+          featuresHeading: "為真正的學習而生，不只是翻譯",
+          featuresLead: "六種語言搭配真正的字典、可自選翻譯服務，任何不受你掌控的伺服器都不會留下資料。",
+          feature1Title: "六種語言，真正的字典",
+          feature1Body: "日文、中文、韓文、西班牙文、法文、德文 — 以字典為基礎的單字查詢，隨需下載。",
+          feature2Title: "自備翻譯服務",
+          feature2Body: "Chrome 內建的裝置端翻譯（免費、免金鑰），或任何你設定的 OpenAI 相容 LLM 端點。",
+          feature3Title: "收藏單字與句子",
+          feature3Body: "儲存任何想複習的內容，書籤可匯出/匯入為純 JSON 檔案。",
+          feature4Title: "任意調整重播速度",
+          feature4Body: "放慢難句的速度，或讓整組卡片自動連續播放、邊聽邊跟。",
+          feature5Title: "預設完全在本機運作",
+          feature5Body: "你的資料庫只存在這個瀏覽器裡。vidlingo 的伺服器不會看到你的影片或字幕。",
+          feature6Title: "支援真實字幕",
+          feature6Body: "自動產生或手動製作皆可 — vidlingo 會直接讀取影片本身已有的字幕。",
+          actionHeading: "實際畫面",
+          shot1Alt: "顯示已儲存卡組的 vidlingo 資料庫畫面",
+          shot1Caption: "你的資料庫，就在你觀看的地方",
+          shot2Alt: "顯示翻譯來源優先順序的 vidlingo 設定面板",
+          shot2Caption: "把翻譯來源排列成優先順序清單",
+          supportHeading: "贊助支持",
+          supportContactLead: "問題、錯誤回報或意見回饋：",
+          supportLead:
+            "vidlingo 免費、採 BYOK（自備金鑰）設計 — 沒有廣告，也不會把你的資料轉送到 vidlingo 自己的伺服器。如果它幫你省下了時間，一杯咖啡的贊助有助於維護這個專案。",
+          footerPrivacy: "隱私權政策",
+        },
+        ko: {
+          pageTitle: "vidlingo — YouTube용 이중언어 자막 플래시카드",
+          pageDescription:
+            "영상 옆 사이드 패널에서 자막이 있는 모든 YouTube 영상을 이중언어 자막 플래시카드로 만들어 보세요. 번역 제공자는 직접 설정 — vidlingo 자체 서버를 거치지 않습니다.",
+          navHow: "작동 방식",
+          navSupport: "후원하기",
+          badge: "Chrome 웹 스토어 출시 예정",
+          heroTitle: "자막이 있는 YouTube 영상을 이중언어 플래시카드로",
+          heroTagline: "영상 옆 사이드 패널에서 바로 — 자막 한 줄 한 줄이 카드가 되어 번역, 단어별 탭, 북마크, 원하는 속도 재생이 가능합니다.",
+          heroImgAlt: "YouTube 영상 옆에서 이중언어 문장 플래시카드 덱을 보여주는 vidlingo 사이드 패널",
+          howHeading: "작동 방식",
+          howLead: "계정도, 업로드도 필요 없습니다 — 모든 과정이 브라우저 안에서 이루어집니다.",
+          step1Title: "자막이 있는 영상 열기",
+          step1Body: "자막(자동 생성 또는 수동, 어떤 언어든)이 있는 YouTube 영상이면 무엇이든.",
+          step2Title: '"라이브러리에 추가" 클릭',
+          step2Body: "vidlingo가 자막을 읽고 사용자가 지정한 제공자로 번역합니다.",
+          step3Title: "덱 확인하기",
+          step3Body: "단어를 탭해 뜻을 확인하고, 복습하고 싶은 부분을 북마크하고, 느리게 재생해 보세요.",
+          featuresHeading: "번역을 넘어, 실제로 배우기 위해 만들었습니다",
+          featuresLead: "실제 사전을 갖춘 6개 언어, 원하는 번역 제공자 선택, 통제 밖의 서버에는 아무것도 남기지 않습니다.",
+          feature1Title: "6개 언어, 진짜 사전",
+          feature1Body: "일본어·중국어·한국어·스페인어·프랑스어·독일어 — 사전 기반 단어 검색을 필요할 때 다운로드.",
+          feature2Title: "번역 제공자를 직접 선택",
+          feature2Body: "Chrome 내장 온디바이스 번역(무료, 키 불필요) 또는 직접 설정한 모든 OpenAI 호환 LLM 엔드포인트.",
+          feature3Title: "단어·문장 북마크",
+          feature3Body: "다시 보고 싶은 내용을 저장하고, 북마크를 단순한 JSON 파일로 내보내기/가져오기 할 수 있습니다.",
+          feature4Title: "원하는 속도로 재생",
+          feature4Body: "어려운 문장은 천천히, 덱 전체는 자동 재생으로 따라가 보세요.",
+          feature5Title: "기본적으로 100% 로컬",
+          feature5Body: "라이브러리는 이 브라우저에만 저장됩니다. vidlingo 서버가 영상이나 자막을 보는 일은 없습니다.",
+          feature6Title: "실제 자막 지원",
+          feature6Body: "자동 생성이든 수동이든 — vidlingo는 영상이 이미 가진 자막을 그대로 읽습니다.",
+          actionHeading: "실제 화면",
+          shot1Alt: "저장된 덱을 보여주는 vidlingo 라이브러리 화면",
+          shot1Caption: "보고 있는 바로 그 자리에, 내 라이브러리",
+          shot2Alt: "번역 소스 우선순위를 보여주는 vidlingo 설정 패널",
+          shot2Caption: "번역 소스를 우선순위 목록처럼 재정렬",
+          supportHeading: "후원하기",
+          supportContactLead: "질문, 버그 제보, 의견은 여기로:",
+          supportLead:
+            "vidlingo는 무료이며 BYOK(직접 키 사용) 방식으로 설계되었습니다 — 광고 없음, vidlingo 자체 서버로 데이터를 중계하지 않음. 시간을 절약해 주었다면, 커피 한 잔 값의 후원이 유지·관리에 도움이 됩니다.",
+          footerPrivacy: "개인정보처리방침",
+        },
+        es: {
+          pageTitle: "vidlingo — Tarjetas de subtítulos bilingües para YouTube",
+          pageDescription:
+            "Convierte cualquier vídeo de YouTube con subtítulos en tarjetas de subtítulos bilingües, justo en un panel lateral junto al vídeo. Usa tu propio proveedor de traducción — nada pasa por los servidores de vidlingo.",
+          navHow: "Cómo funciona",
+          navSupport: "Apoyar",
+          badge: "Próximamente en Chrome Web Store",
+          heroTitle: "Convierte cualquier vídeo de YouTube con subtítulos en tarjetas bilingües",
+          heroTagline:
+            "Justo en un panel lateral junto al vídeo — cada línea de subtítulo se convierte en una tarjeta que puedes traducir, tocar palabra por palabra, guardar y reproducir a cualquier velocidad.",
+          heroImgAlt: "Panel lateral de vidlingo mostrando un mazo de tarjetas de frases bilingües junto a un vídeo de YouTube",
+          howHeading: "Cómo funciona",
+          howLead: "Sin cuenta, sin subir nada — todo ocurre en tu propio navegador.",
+          step1Title: "Abre un vídeo con subtítulos",
+          step1Body: "Cualquier vídeo de YouTube con subtítulos — automáticos o manuales, en cualquier idioma.",
+          step2Title: 'Haz clic en "Añadir a la biblioteca"',
+          step2Body: "vidlingo lee la transcripción y la traduce usando el proveedor que elijas.",
+          step3Title: "Revisa el mazo",
+          step3Body: "Toca cualquier palabra para ver su definición, guarda lo que quieras repasar, reproduce más despacio.",
+          featuresHeading: "Diseñado para aprender de verdad, no solo traducir",
+          featuresLead: "Seis idiomas con diccionarios reales, el proveedor de traducción que prefieras, y nada se guarda en un servidor que no controlas.",
+          feature1Title: "Seis idiomas, diccionarios reales",
+          feature1Body: "Japonés, chino, coreano, español, francés y alemán — búsqueda de palabras basada en diccionario, descargada bajo demanda.",
+          feature2Title: "Usa tu propio proveedor de traducción",
+          feature2Body: "El traductor integrado de Chrome (gratis, sin clave) o cualquier endpoint LLM compatible con OpenAI que configures.",
+          feature3Title: "Guarda palabras y frases",
+          feature3Body: "Guarda todo lo que quieras repasar; exporta/importa tus marcadores como un simple archivo JSON.",
+          feature4Title: "Reproduce a cualquier velocidad",
+          feature4Body: "Ralentiza una frase difícil, o deja que todo un mazo se reproduzca automáticamente mientras sigues el hilo.",
+          feature5Title: "100% local por defecto",
+          feature5Body: "Tu biblioteca vive solo en este navegador. Ningún servidor de vidlingo ve tus vídeos o subtítulos.",
+          feature6Title: "Funciona con subtítulos reales",
+          feature6Body: "Automáticos o manuales — vidlingo lee el subtítulo que el vídeo ya tenga.",
+          actionHeading: "Véelo en acción",
+          shot1Alt: "Vista de la biblioteca de vidlingo con un mazo guardado",
+          shot1Caption: "Tu biblioteca, justo donde estás viendo",
+          shot2Alt: "Panel de configuración de vidlingo mostrando la prioridad de fuentes de traducción",
+          shot2Caption: "Reordena las fuentes de traducción como una lista de prioridad",
+          supportHeading: "Apoyar",
+          supportContactLead: "Preguntas, errores o comentarios:",
+          supportLead:
+            "vidlingo es gratuito y de diseño BYOK — sin anuncios, sin retransmitir tus datos por servidores propios de vidlingo. Si te ha ahorrado tiempo, un café único ayuda a mantenerlo.",
+          footerPrivacy: "Política de privacidad",
+        },
+        fr: {
+          pageTitle: "vidlingo — Cartes de sous-titres bilingues pour YouTube",
+          pageDescription:
+            "Transformez n'importe quelle vidéo YouTube sous-titrée en cartes de sous-titres bilingues, directement dans un panneau latéral à côté de la vidéo. Utilisez votre propre fournisseur de traduction — rien ne transite par les serveurs de vidlingo.",
+          navHow: "Comment ça marche",
+          navSupport: "Soutenir",
+          badge: "Bientôt sur le Chrome Web Store",
+          heroTitle: "Transformez n'importe quelle vidéo YouTube sous-titrée en cartes bilingues",
+          heroTagline:
+            "Directement dans un panneau latéral à côté de la vidéo — chaque ligne de sous-titre devient une carte que vous pouvez traduire, toucher mot par mot, mettre en favori et rejouer à toute vitesse.",
+          heroImgAlt: "Panneau latéral de vidlingo affichant un paquet de cartes de phrases bilingues à côté d'une vidéo YouTube",
+          howHeading: "Comment ça marche",
+          howLead: "Pas de compte, pas d'envoi de fichier — tout se passe dans votre propre navigateur.",
+          step1Title: "Ouvrez une vidéo avec des sous-titres",
+          step1Body: "N'importe quelle vidéo YouTube avec des sous-titres — automatiques ou manuels, dans n'importe quelle langue.",
+          step2Title: 'Cliquez sur « Ajouter à la bibliothèque »',
+          step2Body: "vidlingo lit la transcription et la traduit avec le fournisseur que vous contrôlez.",
+          step3Title: "Consultez le paquet",
+          step3Body: "Touchez un mot pour sa définition, mettez en favori ce que vous voulez revoir, rejouez plus lentement.",
+          featuresHeading: "Conçu pour vraiment apprendre, pas seulement traduire",
+          featuresLead: "Six langues avec de vrais dictionnaires, le fournisseur de traduction de votre choix, et rien de conservé sur un serveur que vous ne contrôlez pas.",
+          feature1Title: "Six langues, de vrais dictionnaires",
+          feature1Body: "Japonais, chinois, coréen, espagnol, français et allemand — recherche de mots basée sur un dictionnaire, téléchargée à la demande.",
+          feature2Title: "Utilisez votre propre fournisseur de traduction",
+          feature2Body: "Le traducteur intégré de Chrome (gratuit, sans clé) ou tout endpoint LLM compatible OpenAI que vous configurez.",
+          feature3Title: "Mettez des mots et des phrases en favori",
+          feature3Body: "Enregistrez tout ce que vous voulez revoir, exportez/importez vos favoris sous forme de simple fichier JSON.",
+          feature4Title: "Rejouez à toute vitesse",
+          feature4Body: "Ralentissez une phrase difficile, ou laissez tout un paquet défiler automatiquement pendant que vous suivez.",
+          feature5Title: "100 % local par défaut",
+          feature5Body: "Votre bibliothèque ne vit que dans ce navigateur. Aucun serveur vidlingo ne voit jamais vos vidéos ou sous-titres.",
+          feature6Title: "Fonctionne avec de vrais sous-titres",
+          feature6Body: "Automatiques ou manuels — vidlingo lit simplement la transcription que la vidéo possède déjà.",
+          actionHeading: "En action",
+          shot1Alt: "Vue de la bibliothèque de vidlingo avec un paquet enregistré",
+          shot1Caption: "Votre bibliothèque, là même où vous regardez",
+          shot2Alt: "Panneau de réglages de vidlingo montrant la priorité des sources de traduction",
+          shot2Caption: "Réorganisez les sources de traduction comme une liste de priorité",
+          supportHeading: "Soutenir",
+          supportContactLead: "Questions, bugs ou retours :",
+          supportLead:
+            "vidlingo est gratuit et conçu en BYOK — pas de publicité, pas de retransmission de vos données par les propres serveurs de vidlingo. Si ça vous a fait gagner du temps, un café ponctuel aide à le maintenir.",
+          footerPrivacy: "Politique de confidentialité",
+        },
+        de: {
+          pageTitle: "vidlingo — Zweisprachige Untertitel-Karteikarten für YouTube",
+          pageDescription:
+            "Verwandelt jedes YouTube-Video mit Untertiteln in zweisprachige Untertitel-Karteikarten, direkt in einer Seitenleiste neben dem Video. Eigener Übersetzungsanbieter — nichts läuft über die Server von vidlingo.",
+          navHow: "So funktioniert's",
+          navSupport: "Unterstützen",
+          badge: "Bald im Chrome Web Store",
+          heroTitle: "Jedes YouTube-Video mit Untertiteln zu zweisprachigen Karteikarten machen",
+          heroTagline:
+            "Direkt in einer Seitenleiste neben dem Video — jede Untertitelzeile wird zu einer Karte, die du übersetzen, Wort für Wort antippen, mit Lesezeichen versehen und in beliebiger Geschwindigkeit abspielen kannst.",
+          heroImgAlt: "vidlingo-Seitenleiste mit einem Stapel zweisprachiger Satz-Karteikarten neben einem YouTube-Video",
+          howHeading: "So funktioniert's",
+          howLead: "Kein Konto, kein Hochladen — alles läuft direkt in deinem eigenen Browser ab.",
+          step1Title: "Ein Video mit Untertiteln öffnen",
+          step1Body: "Jedes YouTube-Video mit Untertiteln — automatisch generiert oder manuell, in jeder Sprache.",
+          step2Title: '„Zur Bibliothek hinzufügen" klicken',
+          step2Body: "vidlingo liest das Transkript und übersetzt es mit einem Anbieter deiner Wahl.",
+          step3Title: "Stapel durchsehen",
+          step3Body: "Auf ein Wort tippen für die Definition, Lesezeichen setzen für später, langsamer abspielen.",
+          featuresHeading: "Gemacht zum echten Lernen, nicht nur zum Übersetzen",
+          featuresLead: "Sechs Sprachen mit echten Wörterbüchern, dein eigener Übersetzungsanbieter, und nichts bleibt auf einem Server, den du nicht kontrollierst.",
+          feature1Title: "Sechs Sprachen, echte Wörterbücher",
+          feature1Body: "Japanisch, Chinesisch, Koreanisch, Spanisch, Französisch und Deutsch — wörterbuchgestützte Wortsuche, bei Bedarf heruntergeladen.",
+          feature2Title: "Eigenen Übersetzungsanbieter mitbringen",
+          feature2Body: "Chromes integrierter On-Device-Übersetzer (kostenlos, kein Schlüssel) oder jeder von dir konfigurierte OpenAI-kompatible LLM-Endpunkt.",
+          feature3Title: "Wörter & Sätze mit Lesezeichen versehen",
+          feature3Body: "Speichere alles, was du dir noch einmal ansehen willst; exportiere/importiere deine Lesezeichen als einfache JSON-Datei.",
+          feature4Title: "In beliebiger Geschwindigkeit abspielen",
+          feature4Body: "Einen kniffligen Satz verlangsamen, oder einen ganzen Stapel automatisch abspielen lassen, während du mitliest.",
+          feature5Title: "Standardmäßig 100 % lokal",
+          feature5Body: "Deine Bibliothek existiert nur in diesem Browser. Kein vidlingo-Server bekommt jemals deine Videos oder Untertitel zu sehen.",
+          feature6Title: "Funktioniert mit echten Untertiteln",
+          feature6Body: "Automatisch generiert oder manuell — vidlingo liest einfach das Transkript, das das Video bereits hat.",
+          actionHeading: "In Aktion",
+          shot1Alt: "vidlingo-Bibliotheksansicht mit einem gespeicherten Stapel",
+          shot1Caption: "Deine Bibliothek, genau dort, wo du gerade schaust",
+          shot2Alt: "vidlingo-Einstellungspanel mit der Priorität der Übersetzungsquellen",
+          shot2Caption: "Übersetzungsquellen wie eine Prioritätenliste neu ordnen",
+          supportHeading: "Unterstützen",
+          supportContactLead: "Fragen, Fehlermeldungen oder Feedback:",
+          supportLead:
+            "vidlingo ist kostenlos und nach dem BYOK-Prinzip aufgebaut — keine Werbung, keine Weiterleitung deiner Daten über eigene vidlingo-Server. Wenn es dir Zeit gespart hat, hilft ein einmaliger Kaffee bei der Pflege.",
+          footerPrivacy: "Datenschutzerklärung",
+        },
+        pt: {
+          pageTitle: "vidlingo — Cartões de legendas bilíngues para o YouTube",
+          pageDescription:
+            "Transforme qualquer vídeo do YouTube com legendas em cartões de legendas bilíngues, num painel lateral ao lado do vídeo. Traga o seu próprio provedor de tradução — nada passa pelos servidores do vidlingo.",
+          navHow: "Como funciona",
+          navSupport: "Apoiar",
+          badge: "Em breve na Chrome Web Store",
+          heroTitle: "Transforme qualquer vídeo do YouTube com legendas em cartões bilíngues",
+          heroTagline:
+            "Num painel lateral ao lado do vídeo — cada linha de legenda vira um cartão que pode traduzir, tocar palavra por palavra, marcar e reproduzir em qualquer velocidade.",
+          heroImgAlt: "Painel lateral do vidlingo mostrando um baralho de cartões de frases bilíngues ao lado de um vídeo do YouTube",
+          howHeading: "Como funciona",
+          howLead: "Sem conta, sem upload — tudo acontece no seu próprio navegador.",
+          step1Title: "Abra um vídeo com legendas",
+          step1Body: "Qualquer vídeo do YouTube com legendas — automáticas ou manuais, em qualquer idioma.",
+          step2Title: 'Clique em "Adicionar à biblioteca"',
+          step2Body: "O vidlingo lê a transcrição e traduz usando o provedor que você controla.",
+          step3Title: "Reveja o baralho",
+          step3Body: "Toque em qualquer palavra para ver a definição, marque o que quer rever, reproduza mais devagar.",
+          featuresHeading: "Feito para aprender de verdade, não só traduzir",
+          featuresLead: "Seis idiomas com dicionários reais, o provedor de tradução que preferir, e nada fica guardado num servidor que você não controla.",
+          feature1Title: "Seis idiomas, dicionários reais",
+          feature1Body: "Japonês, chinês, coreano, espanhol, francês e alemão — busca de palavras baseada em dicionário, baixada sob demanda.",
+          feature2Title: "Traga seu próprio provedor de tradução",
+          feature2Body: "O tradutor integrado do Chrome (grátis, sem chave) ou qualquer endpoint LLM compatível com OpenAI que você configurar.",
+          feature3Title: "Marque palavras e frases",
+          feature3Body: "Salve tudo o que quiser rever; exporte/importe seus marcadores como um simples arquivo JSON.",
+          feature4Title: "Reproduza em qualquer velocidade",
+          feature4Body: "Deixe uma frase difícil mais lenta, ou deixe um baralho inteiro tocar automaticamente enquanto acompanha.",
+          feature5Title: "100% local por padrão",
+          feature5Body: "Sua biblioteca vive apenas neste navegador. Nenhum servidor do vidlingo vê seus vídeos ou legendas.",
+          feature6Title: "Funciona com legendas reais",
+          feature6Body: "Automáticas ou manuais — o vidlingo lê a transcrição que o vídeo já tem.",
+          actionHeading: "Veja em ação",
+          shot1Alt: "Vista da biblioteca do vidlingo com um baralho salvo",
+          shot1Caption: "Sua biblioteca, bem onde você está assistindo",
+          shot2Alt: "Painel de configurações do vidlingo mostrando a prioridade das fontes de tradução",
+          shot2Caption: "Reordene as fontes de tradução como uma lista de prioridade",
+          supportHeading: "Apoiar",
+          supportContactLead: "Perguntas, bugs ou feedback:",
+          supportLead:
+            "O vidlingo é gratuito e feito no modelo BYOK — sem anúncios, sem repassar seus dados pelos próprios servidores do vidlingo. Se ele economizou seu tempo, um café único ajuda a mantê-lo.",
+          footerPrivacy: "Política de Privacidade",
+        },
+      };
+
+      (function () {
+        var params = new URLSearchParams(location.search);
+        var requested = params.get("lang");
+        var lang = STRINGS[requested] ? requested : "en";
+        var t = STRINGS[lang];
+
+        document.documentElement.lang = lang;
+        document.title = t.pageTitle;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute("content", t.pageDescription);
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (t[key]) el.textContent = t[key];
+        });
+        document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-alt");
+          if (t[key]) el.setAttribute("alt", t[key]);
+        });
+
+        // Carries the chosen language through to the privacy-policy link
+        // (also `?lang=`-aware — see privacy.html's own script) so reading
+        // it doesn't drop back to English.
+        var privacyLink = document.querySelector('footer a[data-i18n="footerPrivacy"]');
+        if (privacyLink && lang !== "en") {
+          privacyLink.href = "/vidlingo/privacy.html?lang=" + encodeURIComponent(lang);
+        }
+
+        var select = document.getElementById("lang-switcher");
+        LANGS.forEach(function (entry) {
+          var option = document.createElement("option");
+          option.value = entry.code;
+          option.textContent = entry.label;
+          if (entry.code === lang) option.selected = true;
+          select.appendChild(option);
+        });
+        select.addEventListener("change", function () {
+          var next = new URLSearchParams(location.search);
+          if (select.value === "en") next.delete("lang");
+          else next.set("lang", select.value);
+          var query = next.toString();
+          location.search = query ? "?" + query : "";
+        });
+      })();
+    </script>
     <script>
       // Scroll-reveal — plain IntersectionObserver, no animation library.
       // No-op (and no visual effect at all, see the reduced-motion media

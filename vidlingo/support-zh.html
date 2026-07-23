@@ -3,10 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>支持 vidlingo</title>
+    <title>支持 Fluxora（vidlingo）</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%234f46e5'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 6 6'/%3E%3Cpath d='m4 14 6-6 2-3'/%3E%3Cpath d='M2 5h12'/%3E%3Cpath d='M7 2h1'/%3E%3Cpath d='m22 22-5-10-5 10'/%3E%3Cpath d='M14 18h6'/%3E%3C/g%3E%3C/svg%3E"
+    />
     <style>
       :root {
         color-scheme: light dark;
+        --ink: #18181b;
+        --muted: #71717a;
+        --canvas: #fafafa;
+        --surface: #ffffff;
+        --border: #e4e4e7;
+        --accent: #4f46e5;
+      }
+      * {
+        box-sizing: border-box;
       }
       html,
       body {
@@ -15,22 +29,81 @@
       body {
         margin: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 22px;
+        padding: 24px;
         font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-        color: #18181b;
-        background: #fafafa;
+        color: var(--ink);
+        /* Same soft-atmosphere treatment as vidlingo-support.html, tuned to
+           this page's own pink (Afdian) accent instead of Ko-fi's amber. */
+        background: radial-gradient(60% 50% at 50% 38%, rgba(157, 23, 77, 0.06), transparent 70%), var(--canvas);
+      }
+      /* Same brand mark as every other usefluxora.com/vidlingo page (see
+         vidlingo-homepage.html's own header) — this page used to be a
+         completely unbranded, standalone card with no visual link to the
+         rest of the site. */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .brand-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: var(--accent);
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .brand-mark svg {
+        width: 15px;
+        height: 15px;
+      }
+      .brand-word {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .brand-word b {
+        color: var(--accent);
       }
       .card {
-        background: #ffffff;
-        border: 1px solid #e4e4e7;
-        border-radius: 16px;
-        padding: 44px 40px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 40px 40px 44px;
         text-align: center;
         max-width: 320px;
+        box-shadow: 0 24px 60px rgba(24, 24, 27, 0.1);
+      }
+      /* Afdian's own counterpart to vidlingo-support.html's coffee mug — a
+         heart rising from cupped hands (giving/receiving support), drawn in
+         the same hand-drawn line-art style so the two support pages read as
+         a matched pair instead of one illustrated and one bare. */
+      .gift {
+        display: block;
+        margin: 0 auto 18px;
+      }
+      .gift .hands {
+        stroke: #db2777;
+      }
+      .gift .heart {
+        fill: #db2777;
+      }
+      .gift .sparkle {
+        stroke: #db2777;
+        opacity: 0.6;
       }
       h1 {
         font-size: 19px;
+        line-height: 1.35;
         margin: 0 0 24px;
       }
       .btn {
@@ -62,7 +135,7 @@
         display: inline-block;
         margin-top: 28px;
         font-size: 13px;
-        color: #71717a;
+        color: var(--muted);
         text-decoration: none;
       }
       .back:hover {
@@ -70,13 +143,23 @@
       }
       /* Kept last on purpose — see vidlingo-homepage.html's own comment. */
       @media (prefers-color-scheme: dark) {
-        body {
-          color: #e4e4e7;
-          background: #0a0a0f;
+        :root {
+          --ink: #e4e4e7;
+          --muted: #a1a1aa;
+          --canvas: #0a0a0f;
+          --surface: #141419;
+          --border: #27272a;
+          --accent: #818cf8;
         }
-        .card {
-          background: #141419;
-          border-color: #27272a;
+        body {
+          background: radial-gradient(60% 50% at 50% 38%, rgba(251, 157, 192, 0.08), transparent 70%), var(--canvas);
+        }
+        .gift .hands,
+        .gift .sparkle {
+          stroke: #fb9dc0;
+        }
+        .gift .heart {
+          fill: #fb9dc0;
         }
         .btn {
           background: #2a1220;
@@ -86,15 +169,49 @@
         .btn:hover {
           background: #391a2b;
         }
-        .back {
-          color: #a1a1aa;
-        }
       }
     </style>
   </head>
   <body>
+    <a class="brand" href="https://usefluxora.com/vidlingo/">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" />
+        </svg>
+      </span>
+      <span class="brand-word">vid<b>lingo</b></span>
+    </a>
+
     <div class="card">
-      <h1>支持 vidlingo</h1>
+      <svg
+        class="gift"
+        viewBox="0 0 88 72"
+        width="72"
+        height="59"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path class="sparkle" d="M20 12 L20 4 M16 8 L24 8" stroke-width="2.5" stroke-linecap="round" />
+        <path class="sparkle" d="M70 18 L70 12 M67 15 L73 15" stroke-width="2.5" stroke-linecap="round" />
+        <path
+          class="heart"
+          d="M44 16 C 44 9 33 9 33 19 C 33 27 44 34 44 40 C 44 34 55 27 55 19 C 55 9 44 9 44 16 Z"
+        />
+        <path
+          class="hands"
+          d="M10 48 C 10 42 16 40 22 42 L34 46 M78 48 C 78 42 72 40 66 42 L54 46"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          class="hands"
+          d="M10 48 Q 44 68 78 48"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+      </svg>
+      <h1 id="heading">支持 Fluxora（vidlingo）</h1>
       <!-- No popup widget here — confirmed against Afdian's own developer
            docs (guide.afdian.com/creator/developer): their public API
            surface is webhook + order-query only, no client-side embed/
